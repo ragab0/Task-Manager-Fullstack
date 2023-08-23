@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+  @apply transition-all
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-gray-50 text-gray-900;
+  font-family: Ubuntu, system-ui, -apple-system, sans-serif;
+}
+
+label span {
+  @apply block mb-1;
+
+}
+
+input,
+textarea {
+  @apply p-2 bg-gray-50 border-2 border-gray-100 w-full;
+}
+
+button {
+  @apply py-2 px-4 text-white bg-indigo-500 hover:bg-indigo-600 border-2 border-indigo-600 capitalize;
+}
+
+.btn-dark {
+  @apply text-white bg-gray-900  hover:bg-slate-800;
+}

@@ -1,28 +1,16 @@
-# Node and Express Tutorial
+# Task manager
 
-#### Node Course
+My first back-end api and first fullstack app (MERN app);
 
-[Node Tutorial and Projects Course](https://www.udemy.com/course/nodejs-tutorial-and-projects-course/?referralCode=E94792BEAE9ADD204BC7)
 
-#### Support
+## Languages and tools
 
-Find the App Useful? [You can always buy me a coffee](https://www.buymeacoffee.com/johnsmilga)
-
-#### Contents
-
-1. Node Tutorial
-2. Express Tutorial
-3. Task Manager (MongoDB, Mongoose)
-4. Store API
-5. JWT Basics
-6. Jobs API
-
-#### Course Exclusive
-
-[Node Tutorial and Projects Course](https://www.udemy.com/course/nodejs-tutorial-and-projects-course/?referralCode=E94792BEAE9ADD204BC7)
-
-7. File Upload (local and cloudinary)
-8. Send Email (nodemailer,ethereal and sendgrid )
-9. Stripe Payment
-10. E-Commerce API
-11. Auth Workflow (verify email, reset password)
+1. HTML5
+2. CSS3
+3. JavaSript
+4. React
+5. Nextjs
+6. Tailwindcss
+7. Nodejs
+8. Express.js
+9. Toasting (react-library)
