@@ -1,5 +1,5 @@
 "use client";
-import Task from "@/components/Task";
+import Tasks from "@/components/Tasks";
 import fetchTasks from "@/utils/fetchTasks";
 import { useState, useEffect } from "react";
 
@@ -8,8 +8,8 @@ export default function Home() {
   const initialState = {
     name: "",
     desc: "",
+    complte: false,
   }
-
   const [isWaiting, setWaiting] = useState(null);
   const [formData, setFormData] = useState(
     (typeof window !== "undefined") && (JSON.parse(localStorage.getItem("formData")) ?? initialState)
@@ -29,25 +29,32 @@ export default function Home() {
   async function submitHandler(e) {
     e.preventDefault();
     setWaiting(true);
-    const res = await axios('/api/tasks/', {
-      method: 'POST',
-      headers: { 
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(formData)
-    }).finally(function() {
-      setWaiting(false);
-    })
-    
-    if (!res.ok) {
-      // return newToast("failed", "Opps, mail failed to sent !");
+    try {
+      const res = await axios('/api/tasks/', {
+        method: 'POST',
+        headers: { 
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+      
+      setFormData(initialState);
+      const data = await res.json();
+
+    } catch (error) {
+      console.log(error);
     }
-    setFormData(initialState);
-    const data = await res.json();
-    // return newToast("success", "Congrats, mail has sent");
+    setWaiting(false);
   }
 
-  const fetchedTasks = fetchTasks();
+  const [fetchedTasks, setFetchedTasks] = useState([]);
+  useEffect(function() {
+    async function Effect() {
+      setFetchedTasks(await fetchTasks());
+      // setFetchedTasks([1,2]);
+    }
+    Effect();
+  }, [])
 
   return (
     <main>
@@ -69,11 +76,11 @@ export default function Home() {
         </label>
         <button onClick={submitHandler} disabled={isWaiting}>{isWaiting ? "Loading..." : "Save task"}</button>
       </form>
-      <div>
+      <div className="text-center max-w-lg mx-auto my-16  ">
         { 
-          fetchedTasks && fetchTasks.map((task, i) => (
-            <Task key={i} task={task} />
-          )) 
+          !fetchedTasks.length 
+          ? <p className="bg-slate-200  py-3 font-medium underline">There is no tasks to show yet!</p> 
+          : <Tasks tasks={fetchedTasks} />
         }
       </div>
     </main>

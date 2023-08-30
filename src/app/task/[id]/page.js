@@ -6,35 +6,37 @@ export default function Home() {
   const initialState = {
     name: "",
     desc: "",
-    complete: ""
+    complete: false
   }
   const [isWaiting, setWaiting] = useState(null);
   const [formData, setFormData] = useState(initialState)
 
+  
   function valueHandler(e) {
     const { name, value:newValue, checked } = e.target;
     setFormData(old => ({...old, [name]: newValue ?? checked}));
   }
 
+
   async function submitHandler(e) {
     e.preventDefault();
     setWaiting(true);
-    const res = await axios('/api/tasks/', {
-      method: 'POST',
-      headers: { 
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify(formData)
-    }).finally(function() {
-      setWaiting(false);
-    })
-    
-    if (!res.ok) {
-      // return newToast("failed", "Opps, mail failed to sent !");
+    try {
+      const res = await axios('/api/tasks/', {
+        method: 'POST',
+        headers: { 
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+      
+      setFormData(initialState);
+      const data = await res.json();
+
+    } catch (error) {
+      console.log(error);
     }
-    setFormData(initialState);
-    const data = await res.json();
-    // return newToast("success", "Congrats, mail has sent");
+    setWaiting(false);
   }
 
 

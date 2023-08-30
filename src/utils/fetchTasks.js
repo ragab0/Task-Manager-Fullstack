@@ -1,17 +1,23 @@
 import axios from "axios";
 async function fetchTasks() {
-  const res = await axios("http://localhost:5000/api/tasks", {
-    method: "GET",
-    headers: {
-      'Content-Type': "application/json",
-      'accept': "*/*"
+  try {
+    const res = await axios("http://localhost:5000/api/tasks", {
+      method: "GET",
+      headers: {
+        'Content-Type': "application/json",
+        'accept': "*/*",
+        'Access-Control-Allow-Origin': "no-cors",
+      },
+    });
+    const { success, data } = await res.json();
+    if (!success) {
+      return [];
     }
-  });
-  // const { success, data } = await res.json();
-  // if (success) {
-  //   return null;
-  // }
-  // return data.tasks;
+    return data.tasks;
+  } catch (error) {
+    console.log("Faiiled", error);
+    return [];
+  }
 }
 
 

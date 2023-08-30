@@ -14,7 +14,7 @@ const {
 app.use(express.json());
 
 
-// Setting up the routes;
+// Setting up the routes and them methods;
 app.get("/api/tasks", getTasks );
 app.post("/api/tasks", postTasks );
 app.get("/api/tasks/:id", getTask );

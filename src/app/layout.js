@@ -4,7 +4,7 @@ import './globals.css';
 
 export const metadata = {
   title: "First Fullstack apps",
-  description: "Ragab mit John-Smilga - First Fullstack apps - Built in React, Nextjs, Nodejs, Express.js and mongodb",
+  description: "First Fullstack apps - Built in React, Nextjs, Nodejs, Express.js",
   icon: "/favicon.ico",
 }
 
