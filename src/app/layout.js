@@ -1,10 +1,9 @@
-import Footer from '../components/Footer';
 import './globals.css';
 
 
 export const metadata = {
-  title: "First Fullstack apps",
-  description: "First Fullstack apps - Built in React, Nextjs, Nodejs, Express.js",
+  title: "TODO List",
+  description: "Built in React, Nextjs, and tailwindcss",
   icon: "/favicon.ico",
 }
 
@@ -13,10 +12,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className='min-h-screen py-16 '>
-          {children}
-        </div>
-        <Footer />
+        {
+          children
+        }
       </body>
     </html>
   )

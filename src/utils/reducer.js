@@ -1,3 +1,13 @@
+import { 
+  SET_FORM_VALUES,
+  SET_CURRENT_TYPE,
+  SET_CURRENT_DIR,
+  SET_CURRENT_SORT,
+  SET_CURRENT_VIEW,
+  SET_CURRENT_SEARCH, 
+} from './actions';
+
+
 const initialFormState = {
   name: "",
   desc: "",
@@ -10,14 +20,25 @@ export const initialAppState = {
   formData: initialFormState,
   isLoading: false,
   error: null,
-  tasks: []
+  tasks: [],
+  currentTasks: [],
+
+  filtering: {
+    currentType: "All",
+    currentDir: "main",
+    currentSort: "az",
+    currentView: "squares",
+    currentSearch: ""
+  },
+
 }
 
 
 export default function reducer(state=initialAppState, action) {
   console.log(state);
   switch (action.type) {
-    case "setFormValues":
+    /* 01 Form values */
+    case SET_FORM_VALUES:
       return {
         ...state,
         formData: 
@@ -28,24 +49,55 @@ export default function reducer(state=initialAppState, action) {
           [action.payload.id]: action.payload.value,
         }
       }
-  
-
-    // Fetching and Posting task + their methods;
-    case "setTasks":
+    
+    /* 02 Current data handling */
+    case SET_CURRENT_TYPE:
       return {
         ...state,
-        tasks: action.payload
+        filtering: {
+          ...state.filtering,
+          currentType: action.payload
+        }
       }
-    case "setLoading":
+    
+    case SET_CURRENT_DIR:
       return {
         ...state,
-        isLoading: action.payload
-      }
-    case "setFailed": 
+        filtering: {
+          ...state.filtering,
+          currentDir: action.payload
+        }
+    }    
+    
+    case SET_CURRENT_SORT:
       return {
         ...state,
-        error: action.payload
+        filtering: {
+          ...state.filtering,
+          currentSort: action.payload
+        }
+    }    
+    
+    case SET_CURRENT_VIEW:
+      return {
+        ...state,
+        filtering: {
+          ...state.filtering,
+          currentView: action.payload
+        }
+    }    
+    
+    case SET_CURRENT_SEARCH:
+      return {
+        ...state,
+        filtering: {
+          ...state.filtering,
+          currentSearch: action.payload
+        }
     }
+
+    /*  */
+    
 
     default:
       return state

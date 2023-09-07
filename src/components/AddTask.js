@@ -3,7 +3,7 @@ import { useGlobalContext } from "@/utils/context";
 import usePostTasks from "@/utils/usePostTasks";
 
 
-export default function Form() {
+export default function AddTask() {
   const { appDispatch, appState: {formData, isWaiting, error} } = useGlobalContext();
   const postTasks = usePostTasks();
 
@@ -25,7 +25,7 @@ export default function Form() {
 
 
   return (
-    <form className='px-12 py-8 bg-white grid gap-4 max-w-lg mx-auto rounded-md shadow-md hover:shadow-lg'>
+    <form className='px-5 bg-white grid gap-4 max-w-lg mx-auto rounded-md shadow-md hover:shadow-lg'>
       <h3 className=' text-3xl mb-6 capitalize text-center'>task manager</h3>
       <label>
         <span>Name of task</span>
