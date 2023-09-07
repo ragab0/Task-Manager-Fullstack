@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { useState } from "react";
 
 
@@ -23,11 +24,8 @@ export default function Home() {
     setWaiting(true);
     try {
       const res = await axios('/api/tasks/', {
-        method: 'POST',
-        headers: { 
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(formData)
+        method: 'PUT',
+        body: JSON.stringify({task: formData})
       })
       
       setFormData(initialState);

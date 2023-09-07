@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require("cors")
 const app = express();
 const port = 5000;
 const {
@@ -12,6 +13,9 @@ const {
 
 // Parses data that is on req.body to json data;
 app.use(express.json());
+
+// Enabling corses
+app.use(cors());
 
 
 // Setting up the routes and them methods;

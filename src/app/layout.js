@@ -13,9 +13,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <main className='min-h-screen py-16 '>
+        <div className='min-h-screen py-16 '>
           {children}
-        </main>
+        </div>
         <Footer />
       </body>
     </html>

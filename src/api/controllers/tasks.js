@@ -38,24 +38,24 @@ class TaskCreator {
     }
   }
 
-  static successed(data) {
+  static successed(tasks) {
     return {
       success: true,
-      data,
+      tasks,
     }
   }
 }
 
 
 function getTasks(req, res) {
-  res.json(TaskCreator.successed(tasks));
+  return res.json(TaskCreator.successed(tasks));
 }
 
 
 function postTasks(req, res) {
   const { name, desc } = req.body;
   const newTask = new TaskCreator(name, desc);
-  res.json(TaskCreator.successed({task: newTask}));
+  return res.json(TaskCreator.successed(tasks));
 }
 
 

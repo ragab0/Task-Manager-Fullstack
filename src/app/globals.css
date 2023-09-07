@@ -34,3 +34,7 @@ button {
 .btn-dark {
   @apply text-white bg-gray-900  hover:bg-slate-800;
 }
+
+.tasks {
+  @apply bg-[#f3f6fc] py-8 px-16 min-h-screen;
+}
