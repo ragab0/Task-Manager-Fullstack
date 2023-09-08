@@ -16,9 +16,9 @@ To-do list website - the place wehre you can manage your tasks (add new, remove 
 ## Features
 It introduces us great user-freindly that helps
 - Supports almost operation that you may need (add new, remove one, update other)
-- Easy drag and drop
-- Advanced tasks filtering
-- Good-looking Custom selectors
+- Easy custom drag and drop
+- Advanced filtering
+- Good-looking custom selectors
 - 
 
 ## Sources i used

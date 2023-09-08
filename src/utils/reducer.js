@@ -5,14 +5,25 @@ import {
   SET_CURRENT_SORT,
   SET_CURRENT_VIEW,
   SET_CURRENT_SEARCH, 
-} from './actions';
 
+  SET_USER_FORM_DATA,
+
+  SET_MAX_SLIDES,
+  SET_CURRENT_SLIDE,
+} from './actions';
 
 const initialFormState = {
   name: "",
   desc: "",
   complte: false,
 }
+
+const initialUserFormData = {
+  name: "Legend",
+  bio: "fron-end developer",
+  email: "legend@lg.com"
+}
+
 
 
 export const initialAppState = {
@@ -24,12 +35,23 @@ export const initialAppState = {
   currentTasks: [],
 
   filtering: {
-    currentType: "All",
-    currentDir: "main",
+    currentType: "all",
+    currentDir: "all",
     currentSort: "az",
     currentView: "squares",
     currentSearch: ""
   },
+
+  user: {
+    isSettings: true,
+    initialUserFormData,
+    userFormData: initialUserFormData,
+  },
+
+  slides: {
+    currentSlide: 0,
+    maxSlides: null,
+  }
 
 }
 
@@ -37,7 +59,6 @@ export const initialAppState = {
 export default function reducer(state=initialAppState, action) {
   console.log(state);
   switch (action.type) {
-    /* 01 Form values */
     case SET_FORM_VALUES:
       return {
         ...state,
@@ -50,7 +71,6 @@ export default function reducer(state=initialAppState, action) {
         }
       }
     
-    /* 02 Current data handling */
     case SET_CURRENT_TYPE:
       return {
         ...state,
@@ -96,9 +116,41 @@ export default function reducer(state=initialAppState, action) {
         }
     }
 
-    /*  */
-    
+    case SET_USER_FORM_DATA:
+      console.log(1);    
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          userFormData: {
+            ...state.user.userFormData,
+            [action.payload.name]: action.payload.value,
+          }
+        }
+      }
 
+    
+    case SET_MAX_SLIDES:
+      console.log(action.payload, "###");
+      return {
+        ...state,
+        slides: {
+          ...state.slides,
+          maxSlides: action.payload
+        }
+      }
+
+    case SET_CURRENT_SLIDE:
+      console.log(state.slides.maxSlides);
+      console.log(state.slides.currentSlide);
+      return {
+        ...state,
+        slides: {
+          ...state.slides,
+          currentSlide: state.slides.currentSlide+1 < state.slides.maxSlides ? state.slides.currentSlide + 1 : 0
+        }
+      }
+    
     default:
       return state
   }

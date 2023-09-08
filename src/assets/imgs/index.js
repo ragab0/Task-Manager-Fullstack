@@ -11,16 +11,15 @@ import sortAlfaDown from "./sort-alfa-down.svg";
 import sortNumberDown from "./sort-number-down.svg";
 import starLine from "./star-line.svg";
 import trash from "./trash.svg";
-import view1 from "./view-1.svg";
-import view2 from "./view-2.svg";
 import x from "./x.svg";
 import vector from "./Vector.svg"
 import list from "./list.svg"
-import viewSquare from "./viewSquare.svg"
-import viewPaillers from "./viewPaillers.svg"
-import viewBubbles from "./viewBubbles.svg"
 import sort from "./sort.svg"
 import admin from "./admin.svg"
+
+import ViewSquares from "./ViewSquares.js"
+import ViewPaillers from "./ViewPaillers.js"
+import ViewBubbles from "./ViewBubbles.js"
 
 
 // Nextjs disallowed the default obj export becuase that leaks nextjs principles;
@@ -38,15 +37,15 @@ export const imgs = {
   sortNumberDown,
   starLine,
   trash,
-  view1,
-  view2,
   x,
-
   vector,
   list,
-  viewSquare,
-  viewPaillers,
-  viewBubbles,
   sort,
   admin,
+}
+
+export const svgs = {
+  ViewSquares,
+  ViewPaillers,
+  ViewBubbles,
 }

@@ -1,20 +1,27 @@
+"use client";
 import Image from "next/image";
 import { imgs } from "@/assets/imgs/index"
+import { useGlobalContext } from "@/utils/context";
 const { vector, admin } = imgs;
 
 
-export default function () {
+export default function ({nextHandler}) {
+
+  const {appState: {user: {userFormData: {name, bio} }}} = useGlobalContext();
+
+
+
   return (
-    <div className="flex items-center justify-between p-4 overflow-hidden bg-white  rounded-2xl">
-      <figure className="capitalize inline-flex items-start gap-3 ">
+    <div className="grid grid-cols-[1fr_40px] items-center justify-between p-4 bg-white  rounded-2xl">
+      <figure className="capitalize grid grid-cols-[auto_1fr] items-start gap-3 ">
         <Image src={vector} alt="img" color="red" />
-        <figcaption>
-          <h4>Legend</h4>
-          <span className="text-[10px]">the brother</span>
-        </figcaption>  
+        <figcaption className=" overflow-hidden ">
+          <h4 className="text-ellipsis overflow-hidden">{name}</h4>
+          <span className="text-[10px] break-all">{bio}</span>
+        </figcaption>
       </figure>
-      <button>
-        <Image alt="admin" src={admin} className="w-10 h-10 p-2" />
+      <button className="btn-img" onClick={nextHandler}>
+        <Image alt="admin" src={admin} />
       </button>
     </div>
   )

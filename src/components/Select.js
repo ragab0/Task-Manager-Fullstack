@@ -19,7 +19,7 @@ export default function Select({list=[], img}) {
             } 
             {current.name}
         </span>
-        <button onClick={() => setOpen(o => !o)}  className={`p-3 hover:scale-125 rotate-180 cursor-pointer transition-all ${isOpen ? "rotate-0" : ""}`}>
+        <button onClick={() => setOpen(o => !o)}  className={`p-3 hover:scale-125 hover:bg-slate-100 rounded-full  cursor-pointer transition-all ${isOpen ? "rotate-0" : "-rotate-180"}`}>
           <Image src={arrow} alt="arrow" className="w-[10px] h-[10px]" />
         </button>
       </div>

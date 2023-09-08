@@ -1,5 +1,5 @@
-import { imgs } from "../imgs";
-const { viewSquare, viewPaillers, viewBubbles, date } = imgs;
+import { svgs } from "../imgs";
+const { ViewSquares, ViewPaillers, ViewBubbles, date } = svgs;
 
 
 export const filterTypes = [
@@ -39,13 +39,13 @@ export const tasks = [
 export const viewTypes = [
   {
     name: "squares",
-    iconSrc: viewSquare,
+    Ico: ViewSquares,
   },{
     name: "paillers",
-    iconSrc: viewPaillers,
+    Ico: ViewPaillers,
   },{
     name: "bubbles",
-    iconSrc: viewBubbles,
+    Ico: ViewBubbles,
   },
 ]
 
@@ -57,5 +57,30 @@ export const timeTypes = [
     name: "week",
   },{
     name: "month",
+  },
+]
+
+
+const prioretyTypes = [
+  {
+    name: "importnat",
+  },{
+    name: "urgent",
+  },{
+    name: "importnat",
+  },
+]
+
+
+export const accountFields = [
+  {
+    name: "name",
+    type: "text"
+  },{
+    name: "bio",
+    type: "text"
+  },{
+    name: "email",
+    type: "email"
   },
 ]
