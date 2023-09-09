@@ -15,25 +15,12 @@ export const filterTypes = [
 ]
 
 
-export const tasks = [
-  {
-    id: "Legend",
-    title: "1",
-    desc: "11111111",
-    date: "11/1/1111",
-    isCompleted: false,
-    tasksType: "important",
-    tasksFolder: "main"
-  },{
-    id: "2",
-    title: "Legend1",
-    desc: "Hey legend this is a virtual description",
-    date: "11/1/1111",
-    isCompleted: false,
-    tasksType: "important",
-    tasksFolder: "main"
-  }
-]
+export const taskColors = [
+  "#FDF3B5", 
+  "#D1EAEE", 
+  "#FEDADA", 
+  "#FFD4AA"
+];
 
 
 export const viewTypes = [

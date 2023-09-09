@@ -1,47 +1,45 @@
 "use client";
 import { useGlobalContext } from "@/utils/context";
-import usePostTasks from "@/utils/usePostTasks";
-
+import { addTaskFormDataSetter, addTaskSubmitSetter, isModalSetter } from "@/utils/actions";
+import Modal from "./Modal";
+import Select from "./Select";
+import "./comps.css";
 
 export default function AddTask() {
-  const { appDispatch, appState: {formData, isWaiting, error} } = useGlobalContext();
-  const postTasks = usePostTasks();
-
+  const { appDispatch, appState: {isWaiting, addTask: {addTaskFormData: {title, date, desc, folder}}} } = useGlobalContext();
   function valueHandler(e) {
-    appDispatch({
-      type: "setFormValues", 
-      payload: {
-        id: e.target.name,
-        value: e.target.value,
-    }})
+    appDispatch(addTaskFormDataSetter(e.target.name, e.target.value));
   }
-
 
   function submitHandler(e) {
     e.preventDefault();
-    postTasks();
+    appDispatch(addTaskSubmitSetter());
+    appDispatch(isModalSetter(false));
   }
 
 
-
   return (
-    <form className='px-5 bg-white grid gap-4 max-w-lg mx-auto rounded-md shadow-md hover:shadow-lg'>
-      <h3 className=' text-3xl mb-6 capitalize text-center'>task manager</h3>
-      <label>
-        <span>Name of task</span>
-        <input  name="name" 
-                value={formData.name} 
-                onChange={valueHandler} 
-                placeholder='e.g. wash dishes' />
-      </label>
-      <label>
-        <span>More information</span>
-        <textarea name="desc" 
-                  value={formData.desc} 
-                  onChange={valueHandler} 
-                  placeholder='write more description about wash dishes' rows={4} />
-      </label>
-      <button onClick={submitHandler} disabled={isWaiting}>{isWaiting ? "Loading..." : "Save task"}</button>
-    </form>
+    <Modal heading={"add task"}>
+      <form className='task-from content-start text-start capitalize'>
+        <label>
+          <span>title</span>
+          <input name="title" value={title} onChange={valueHandler} placeholder='e.g. task one' />
+        </label>
+        <label>
+          <span>date</span>
+          <input name="date" value={date} onChange={valueHandler} placeholder='e.g. today' />
+        </label>
+        <label>
+          <span>desc - separating with "&&"</span>
+          <textarea name="desc" value={desc} onChange={valueHandler} rows={3} placeholder='e.g. drink tea && drink coffee'></textarea>
+        </label>
+        {/* <label>
+          <span>select folder</span>
+          <input name="folder" value={folder} />
+        </label> */}
+        {/* <Select list={[{name: "all"}, {name: "all"}]} /> */}
+        <button onClick={submitHandler} disabled={isWaiting} className={`btn-main w-full mb-2 mt-4 ${isWaiting ? "opacity-60" : ""}`}>{isWaiting ? "Loading..." : "save"}</button>
+      </form>
+    </Modal>
   )
 }

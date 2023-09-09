@@ -31,17 +31,36 @@
   }
   
   h1 {
-    @apply font-bold text-xl md:text-2xl text-center mb-8;
+    @apply font-bold text-xl md:text-3xl text-center mb-8;
   }
-  h3 {
+  h2 {
     @apply text-2xl md:text-4xl mb-2
   }
+  h3 {
+    @apply text-xl md:text-2xl mb-2
+  }
   h4 {
-    @apply text-sm leading-3
+    @apply text-lg 
   }
 
   button {
     @apply hover:opacity-80 active:scale-90
+  }
+
+  ol {
+    list-style-position:inside;
+    list-style-type: square;
+  }
+
+  label span {
+    display: block;
+  }
+  [aria-label] {
+    @apply relative
+  }
+
+  [aria-label]::before {
+    content: attr(aria-label);
   }
 }
 
@@ -51,5 +70,11 @@
   }
   .btn-img img {
     @apply w-full h-full p-2;
+  }
+  .btn-main {
+    @apply capitalize block p-4 bg-mainClr text-[#394351] rounded-2xl shadow-md border-none 
+  }
+  .active-main {
+    @apply bg-mainClr text-[#394351]
   }
 }

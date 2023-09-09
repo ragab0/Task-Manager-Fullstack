@@ -5,67 +5,34 @@ import {
   SET_CURRENT_SORT,
   SET_CURRENT_VIEW,
   SET_CURRENT_SEARCH, 
-
   SET_USER_FORM_DATA,
-
   SET_MAX_SLIDES,
   SET_CURRENT_SLIDE,
+  SET_IS_MODAL,
+  SET_ADD_TASK_FORM_DATA,
+  SET_ADD_TASK_SUBMIT
 } from './actions';
 
-const initialFormState = {
-  name: "",
-  desc: "",
-  complte: false,
-}
-
-const initialUserFormData = {
-  name: "Legend",
-  bio: "fron-end developer",
-  email: "legend@lg.com"
-}
+import initialState, { Task } from './initialState';
 
 
-
-export const initialAppState = {
-  initialFormState,
-  formData: initialFormState,
-  isLoading: false,
-  error: null,
-  tasks: [],
-  currentTasks: [],
-
-  filtering: {
-    currentType: "all",
-    currentDir: "all",
-    currentSort: "az",
-    currentView: "squares",
-    currentSearch: ""
-  },
-
-  user: {
-    isSettings: true,
-    initialUserFormData,
-    userFormData: initialUserFormData,
-  },
-
-  slides: {
-    currentSlide: 0,
-    maxSlides: null,
-  }
-
-}
-
-
-export default function reducer(state=initialAppState, action) {
+// To show the state formatting;
+export default function reducer(state=initialState, action) {
   console.log(state);
   switch (action.type) {
+    case SET_IS_MODAL:
+      return {
+        ...state,
+        modal: {
+          ...state.modal,
+          isModal: action.payload,
+        }
+      }
+
     case SET_FORM_VALUES:
       return {
         ...state,
-        formData: 
-          action.payload.savedData 
-          ?? 
-          {
+        formData: {
           ...state.formData,
           [action.payload.id]: action.payload.value,
         }
@@ -151,6 +118,33 @@ export default function reducer(state=initialAppState, action) {
         }
       }
     
+    case SET_ADD_TASK_FORM_DATA:
+      return {
+        ...state,
+        addTask: {
+          ...state.addTask,
+          addTaskFormData: {
+            ...state.addTask.addTaskFormData,
+            [action.payload.name]: action.payload.value,
+          }
+        }
+      }
+
+    case SET_ADD_TASK_SUBMIT:
+      const { title, desc, date, priorety, folder } = state.addTask.addTaskFormData;
+      const newTask = Task.createTask(title, desc, date, priorety, folder);
+      return {
+        ...state,
+        tasksGroup: {
+          ...state.tasksGroup,
+          tasks: [newTask, ...state.tasksGroup.tasks],
+        },
+        addTask: {
+          ...state.addTask,
+          addTaskFormData: Task.getInitialAddTaskFormData(),
+        }
+      }
+
     default:
       return state
   }

@@ -2,7 +2,7 @@ import './globals.css';
 
 
 export const metadata = {
-  title: "TODO List",
+  title: "Todo List",
   description: "Built in React, Nextjs, and tailwindcss",
   icon: "/favicon.ico",
 }

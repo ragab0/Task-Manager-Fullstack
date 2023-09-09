@@ -1,0 +1,15 @@
+/* Task */
+.task-from input,
+.task-from textarea {
+    @apply p-2 rounded-md mt-1 mb-3 w-full
+}
+
+
+/* FOlders */
+/* .folders__backed {
+    @apply ;
+} */
+
+.folder__active {
+    @apply text-white bg-mainClr border-transparent active:scale-100;
+}

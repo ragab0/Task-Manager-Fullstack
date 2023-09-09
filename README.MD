@@ -1,7 +1,7 @@
 # TODO List
 To-do list website - the place wehre you can manage your tasks (add new, remove one, update other) in organized way with the advanced user-freindly features that comes with;
 
-![task-manager-img](./src/assets/progress-imgs/day_01.png)
+![task-manager-img](./src/assets/progress-imgs/day_03.png)
 
 ## Technologies and tools
 
@@ -16,9 +16,10 @@ To-do list website - the place wehre you can manage your tasks (add new, remove 
 ## Features
 It introduces us great user-freindly that helps
 - Supports almost operation that you may need (add new, remove one, update other)
-- Easy custom drag and drop
-- Advanced filtering
-- Good-looking custom selectors
-- 
+- Easy drag and drop (custom creation)
+- Advanced filtering (using useReducer and useContext)
+- Good-looking selection (custom)
+- Custom sliding in the way of - **كله رايح** - all is going :D :)
+
 
 ## Sources i used

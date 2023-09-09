@@ -29,7 +29,7 @@ export default function Slides() {
   }, [])
 
   return (
-    <section className="bg-slate-100 static top-0 left-0 px-5 py-10 rounded-2xl overflow-hidden">
+    <section className="bg-slate-100 min-h-[calc(100vh-32px)] sticky top-4 left-0 px-5 py-10 rounded-2xl overflow-x-hidden">
       {
         slides.map(({Slide, heading}, i) => (
           <div key={i} className={`slide animate-slideRight ${currentSlide === i ? "" : "hidden"}`}>
