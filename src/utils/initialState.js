@@ -1,40 +1,50 @@
+import { nanoid } from "nanoid";
 
 export class Task {
-  static numberOfTasks = 0;
-  static d = new Date();
-  static date = `${String(Task.d.getDate()).padStart(2, '0')}/${String(Task.d.getDate()).padStart(2, '0')}/${Task.d.getFullYear()}`;
+  static lastColor = null;
+  static colors = ["#FDF3B5", "#D1EAEE", "#FEDADA", "#FFD4AA"];
+  static date = `${new Date().getFullYear()}-${String(new Date().getMonth()+1).padStart(2, 0)}-${String(new Date().getDate()).padStart(2, 0)}`;
 
-  constructor() {
-    this.id = ++Task.numberOfTasks;
-    this.isCompleted = false;
-  }
 
-  static createTask(title=`A Task`, desc="", date=Task.date, priorety=false, folder="all") {
+  static createTask(notColor, title=`A Task`, desc="", folder="main") {
     return {
+      id: nanoid(),
+      date: Task.date,
+      color: this.getColor(notColor),
+      isCompleted: false,
       title,
       desc,
-      date,
-      priorety,
-      folder
+      folder,
     }
   }
 
+  static getColor(notColor) {
+    let newColor = Task.colors[Math.floor(Math.random() * Task.colors.length)];
+    while (newColor === notColor) {
+      newColor = Task.colors.at(Math.floor(Math.random() * Task.colors.length));
+    }
+    Task.lastColor = newColor;
+    return newColor;
+  }
+
   static getInitialTasks() {
-    const task1 = Task.createTask("Legend", "Do'nt forget to update your old projects && better than making new ones", Task.date, "important", "main");
-    const task2 = Task.createTask("Legend2", "it isn't by how many repos you have. believe me :)", Task.date, "important", "main");
+    const task1 = Task.createTask(null, "water the task", "# Water\n## Drink Water\n### 8Glasses of water\n#### Drink 8 glasses of water\n ##### ___waaaaaaaaaaaaaaaaaaaaaaa___", "main");
+    const task2 = Task.createTask(task1.color, "Legend2", "it isn't by how many repos you have. believe me :)", "main");
     return [task1, task2];
   }
 
-  static getInitialAddTaskFormData() {
-    const task = Task.createTask();
-    return task;
+  static getInitialTaskFormData() {
+    return {
+      title:"A Task",
+      date: Task.date,
+      desc:"",
+      folder:"main",
+    };
   }
 }
 
 
-
 export class User {
-
   static createInitialUserFormData(name="Legend", bio="fron-end developer", email="") {
     return {
       name,
@@ -47,46 +57,57 @@ export class User {
     const form = User.createInitialUserFormData();
     return form;
   }
-
 }
-
 
 
 
 export default {
   isLoading: false,
   error: null,
+  version: 1,
+  isSettings: false,
 
+  // 01
   modal: {
-    isModal: false,
+    isTaskModal: false,
+    isAddingFolder: false,
   },
 
-  tasksGroup: {
-    tasks: Task.getInitialTasks(),
-    currentTasks: Task.getInitialTasks(),
+  // 02
+  filtering: {
+    currentDate: "today",
+    currentDir: "all",
+    currentSort: "newer",
+    currentView: "squares",
+    currentSearch: "",
   },
 
-  addTask: {
-    addTaskFormData: Task.getInitialAddTaskFormData(),
-    addTaskSubmit: null,
-  },
-
+  // 03
   user: {
     userFormData: User.getInitialUserFormData(),
     isSettings: true,
   },
 
+  // 04
   slides: {
     currentSlide: 0,
     maxSlides: null,
   },
 
-  filtering: {
-    currentType: "all",
-    currentDir: "all",
-    currentSort: "az",
-    currentView: "squares",
-    currentSearch: "",
+  // 05
+  folder: {
+    folders: ["main", "projects", "daily"],
+    addFolderField: "",
   },
 
+  tasks: {
+    tasksList: Task.getInitialTasks(),
+    currentTasksList: [],
+  },
+
+  task: {
+    taskFormData: Task.getInitialTaskFormData(),
+    taskSubmit: null,
+    isTaskEditted: false,
+  },
 }

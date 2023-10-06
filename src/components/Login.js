@@ -7,8 +7,11 @@ const { vector, admin } = imgs;
 
 export default function ({nextHandler}) {
 
-  const {appState: {user: {userFormData: {name, bio} }}} = useGlobalContext();
-
+  const {
+    appState: {
+      user: {userFormData: {name, bio} }
+    }
+  } = useGlobalContext();
 
 
   return (
@@ -17,7 +20,7 @@ export default function ({nextHandler}) {
         <Image src={vector} alt="img" color="red" />
         <figcaption className=" overflow-hidden ">
           <h4 className="text-ellipsis overflow-hidden">{name}</h4>
-          <span className="text-[10px] break-all">{bio}</span>
+          <span className="text-[10px] break-all leading-4 block mt-1">{bio}</span>
         </figcaption>
       </figure>
       <button className="btn-img" onClick={nextHandler}>

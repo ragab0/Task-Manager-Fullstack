@@ -1,15 +1,21 @@
 "use client";
 import { viewTypes } from '@/assets/data/data'
 import { useGlobalContext } from '@/utils/context';
-import { currentViewSetter } from '@/utils/actions';
+import { filterActions } from '@/utils/actions';
 
 
 export default function Views() {
-  const {appDispatch, appState: {filtering: {currentView}}} = useGlobalContext();
+  const { 
+    appDispatch, 
+    appState: {
+      filtering: {currentView}}
+  } = useGlobalContext();
+  
   function cllickHandler(e) {
-    appDispatch(currentViewSetter(e.target.closest("button").name))
+    appDispatch(filterActions.currentViewSetter(e.target.closest("button").name))
   }
 
+  
   return (
     <div>
       <ul className='flex justify-end items-center gap-2'>

@@ -3,7 +3,7 @@ import './globals.css';
 
 export const metadata = {
   title: "Todo List",
-  description: "Built in React, Nextjs, and tailwindcss",
+  description: "Save and manage your tasks with AI - with Tod",
   icon: "/favicon.ico",
 }
 
