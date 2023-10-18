@@ -1,21 +1,31 @@
 "use client";
-import { modalActions } from "@/utils/actions";
-import { useGlobalContext } from "@/utils/context";
+import { useDispatch } from "react-redux";
+import { modalActions } from "@/toolkits/features/modal/modalSlice";
+import ReduxProvider from "./ReduxProvider";
 
+function AddFolderBtnBody() {
+  const appDispatch = useDispatch();
 
-export default function AddFolderBtn() {
-  const {
-    appDispatch
-  } = useGlobalContext();
-
-  function addFolderHandler(value) {
-    appDispatch(modalActions.isAddingFolderModalSetter(value));
+  function addFolderHandler() {
+    appDispatch(modalActions.modalAddFolderSetter());
   }
-
 
   return (
     <div className="px-[18px]">
-      <button className='w-11 h-11 rounded-full bg-slate-100 text-xl' onClick={() => addFolderHandler(true)}>{"+"}</button>
+      <button 
+        className="w-11 h-11 rounded-full bg-slate-100 text-xl"
+        onClick={addFolderHandler}
+      >
+        {"+"}
+      </button>
     </div>
-  )
+  );
+}
+
+export default function AddFolderBtn() {
+  return (
+    <ReduxProvider>
+      <AddFolderBtnBody />
+    </ReduxProvider>
+  );
 }

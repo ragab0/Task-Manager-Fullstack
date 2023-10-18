@@ -1,19 +1,16 @@
-"use client";
-import AppProvider from "@/utils/context";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Slides from "@/components/Slides";
 import Tasks from "@/components/Tasks";
 import Modals from "@/components/Modals";
-import Bot from "@/components/Bot";
-
+// import Bot from "@/components/Bot";
 
 export default function home() {
   return (
-    <AppProvider>
+    <>
       <Modals />
-      <Bot />
-      <div>
+      {/* <Bot /> */}
+      <div id="root">
         <main className="grid md:grid-cols-[300px_1fr] min-h-screen items-start">
           <Slides />
           <div className="body p-5 xs:p-10 overflow-hidden">
@@ -22,7 +19,7 @@ export default function home() {
           </div>
         </main>
         <Footer />
-      </div>    
-    </AppProvider>
-  )
+      </div>
+    </>
+  );
 }
