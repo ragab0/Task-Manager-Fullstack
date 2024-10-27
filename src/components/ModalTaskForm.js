@@ -52,6 +52,7 @@ export default function ModalTaskForm({ closeHandler }) {
     appDispatch(modalActions.modalRemoveRear());
   }
 
+  console.log(date, "##################");
 
   return (
     <ModalHeader

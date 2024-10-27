@@ -9,6 +9,10 @@ export const selectTypes = {
 
 export const selectTimeFilter = [
   {
+    name: "All time",
+    value: "all",
+  },
+  {
     name: "today",
     value: "today",
   },
@@ -56,21 +60,6 @@ export const viewTypes = [
   },
 ];
 
-const prioretyTypes = [
-  {
-    name: "importnat",
-    value: "importnat",
-  },
-  {
-    name: "urgent",
-    value: "urgent",
-  },
-  {
-    name: "importnat",
-    value: "importnat",
-  },
-];
-
 export const accountFields = [
   {
     name: "name",
@@ -80,8 +69,8 @@ export const accountFields = [
     name: "bio",
     type: "text",
   },
-  {
-    name: "email",
-    type: "email",
-  },
+  // {
+  //   name: "email",
+  //   type: "email",
+  // },
 ];

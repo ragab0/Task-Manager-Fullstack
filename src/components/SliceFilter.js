@@ -26,7 +26,7 @@ function SliceFilterBody({ nextHandler }) {
   return (
     <div>
       <Login nextHandler={nextHandler} />
-      <div className="mt-8 mb-12 border-2 w-1/3 mx-auto border-slate-200 rounded-full"></div>
+      <div className="mt-8 mb-12 border-2 w-1/3 mx-auto border-slate-400 rounded-full"></div>
       <Select
         list={selectTimeFilter}
         img={imgs.date}
@@ -39,7 +39,7 @@ function SliceFilterBody({ nextHandler }) {
         dispacher={selectSortHandler}
         isResetting={isResetting}
       />
-      <div className="mt-8 mb-12 border-2 w-1/3 mx-auto border-slate-200 rounded-full"></div>
+      <div className="mt-8 mb-12 border-2 w-1/3 mx-auto border-slate-400 rounded-full"></div>
       <button onClick={resetHandler} className="p-3 bg-red-400/90 w-full rounded-2xl text-slate-100">
         Reset
       </button>

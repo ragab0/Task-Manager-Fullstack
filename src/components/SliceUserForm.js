@@ -25,7 +25,7 @@ function SliceUserFormBody({ nextHandler }) {
   }
 
   async function copyHandler(e) {
-    const blob = new Blob([JSON.stringify(store.getState())], {
+    const blob = new Blob([localStorage.getItem("persist:tod")], {
       type: "application/json",
     });
     FileSaver.saveAs(blob, `Tasks_V${String(version).padStart(2, 0)}`);
@@ -37,7 +37,7 @@ function SliceUserFormBody({ nextHandler }) {
       <button className="btn-img w-12 h-12 mx-auto block hover:bg-slate-200">
         <Image alt="back" src={x} onClick={nextHandler} />
       </button>
-      <div className="my-8 border-2 w-1/3 mx-auto border-slate-200 rounded-full"></div>
+      <div className="my-8 border-2 w-1/3 mx-auto border-slate-400 rounded-full"></div>
       <form className=" capitalize">
         {accountFields.map(({ name: n, type: t }, i) => (
           <label key={i} className="mb-3 block">
@@ -52,7 +52,7 @@ function SliceUserFormBody({ nextHandler }) {
           </label>
         ))}
       </form>
-      <div className="my-8 border-2 w-1/3 mx-auto border-slate-200 rounded-full"></div>
+      <div className="my-8 border-2 w-1/3 mx-auto border-slate-400 rounded-full"></div>
       <button
         className="underline py-2 block mx-auto text-green-500"
         onClick={copyHandler}
@@ -60,9 +60,11 @@ function SliceUserFormBody({ nextHandler }) {
         <span className="block">Save your data</span>
         local version
       </button>
-      <div className="my-2 w-full h-[100px] bg-slate-200 cursor-pointer flex justify-center items-center">
-        Upload
-      </div>
+      <label className=" my-2 w-full h-[100px] bg-slate-200 cursor-pointer flex justify-center items-center
+       border-dashed border-2 border-gray-400">
+        Upload data file
+        <input type="file" className="hidden" />
+      </label>
     </div>
   );
 }

@@ -3,9 +3,10 @@ import { nanoid } from "nanoid";
 export class Task {
   static lastColor = null;
   static colors = ["#FDF3B5", "#D1EAEE", "#FEDADA", "#FFD4AA"];
-  static date = `${new Date()
-    .getFullYear()}-${String(new Date()
-    .getMonth()+1).padStart(2, 0)}-${String(new Date()
+  static d = new Date();
+  static date = `${Task.d
+    .getFullYear()}-${String(Task.d
+    .getMonth()+1).padStart(2, 0)}-${String(Task.d
     .getDate()).padStart(2, 0)}`;
 
 
@@ -13,6 +14,7 @@ export class Task {
     return {
       id: nanoid(),
       date: Task.date,
+      fullDate: Task.d,
       color: this.getColor(notColor),
       isCompleted: false,
       title,

@@ -11,7 +11,7 @@ function LoginBody({ nextHandler }) {
   return (
     <div className="grid grid-cols-[1fr_40px] items-center justify-between p-4 bg-white  rounded-2xl">
       <figure className="capitalize grid grid-cols-[auto_1fr] items-start gap-3 ">
-        <Image src={vector} alt="img" color="red" />
+        <Image src={vector} alt="img" color="red" width={32} className="rounded-full" />
         <figcaption className=" overflow-hidden ">
           <h4 className="text-ellipsis overflow-hidden">{name}</h4>
           <span className="text-[10px] break-all leading-4 block mt-1">

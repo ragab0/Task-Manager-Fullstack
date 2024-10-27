@@ -9,6 +9,7 @@ import { getPeriodByName } from "@/utils/date";
 import { selectTimeFilter } from "@/assets/data/data";
 import Image from "next/image";
 import ReduxProvider from "./ReduxProvider";
+import { getSortingVersion } from "@/utils/sort";
 
 function TasksBody() {
   const appDispatch = useDispatch();
@@ -42,29 +43,23 @@ function TasksBody() {
 
   useEffect(
     function () {
-      const payload = tasksList.filter((task) => {
-        let cDateName = String(currentDate).toLocaleLowerCase(),
-            cSortName = String(currentSort).toLocaleLowerCase(),
+      const filteredPayload = tasksList.filter((task) => {
+        let cDateVal = String(currentDate).toLocaleLowerCase(),
             cSearch = String(currentSearch).toLocaleLowerCase(),
             cDir = String(currentDir).toLocaleLowerCase();
         let taskFolder = String(task.folder).toLocaleLowerCase(),
             taskTitle = String(task.title).toLocaleLowerCase(),
-            taskIsCompleted = task.isCompleted,
-            taskDate = task.date;
-
-          console.log("!!!!!", new Date(taskDate), "###", getPeriodByName(cDateName));
-          console.log("!!!!!", new Date(taskDate) >= getPeriodByName(cDateName));
+            taskDate = new Date(Date.parse(task.fullDate));
 
         return (
-          new Date(taskDate) >= getPeriodByName(cDateName) &&
-          taskTitle.includes(cSearch) &&
-          (cDir === "all" || cDir === taskFolder) &&
-          1
+          (cDateVal === "all" || taskDate >= getPeriodByName(cDateVal)) &&
+          (taskTitle.includes(cSearch)) &&
+          (cDir === "all" || cDir === taskFolder)
         );
       });
 
-      appDispatch(taskActions.currentTasksListSetter(payload));
-      console.log("and a useeffect dispatching");
+      const sortedPayload = getSortingVersion(filteredPayload, currentSort);
+      appDispatch(taskActions.currentTasksListSetter(sortedPayload));
     },
     [filterState, tasksList]
   );

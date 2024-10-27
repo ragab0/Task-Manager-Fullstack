@@ -1,0 +1,12 @@
+{
+    "name": "tod",
+    "description": "A simple to-do list website.",
+    "icons": [
+      {
+        "src": "/icon.png",
+        "sizes": "192x192"
+      }
+    ],
+    "start_url": "/",
+    "display": "standalone"
+}

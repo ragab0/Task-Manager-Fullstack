@@ -1,7 +1,7 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
-  currentDate: "today",
+  currentDate: "all",
   currentDir: "all",
   currentSort: "newer",
   currentView: "squares",

@@ -33,13 +33,18 @@ export default function Select({
       isOpen: false,
       current: curr,
     });
-    console.log(curr.name);
-    dispacher(curr.name);
+    dispacher(curr.value);
   }
 
   useEffect(function() {
     setSelect(initialState);
   }, [isResetting])
+
+  useEffect(function() {
+    list.map((curr, i) => (
+      curr.value === selectState.current.value && choiceHandler(curr)
+    ))
+  }, [])
 
   const { isOpen, current } = selectState;
   const { name } = current || {};
@@ -71,6 +76,7 @@ export default function Select({
       <div
         className={`p-3 animate-slideDown bg-white ${isOpen ? "" : "hidden"}`}
       >
+        {/* Options */}
         {list.map((curr, i) => (
           <button
             key={i}

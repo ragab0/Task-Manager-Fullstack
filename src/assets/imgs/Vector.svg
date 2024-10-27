@@ -1,3 +1,11 @@
-<svg width="40" height="37" viewBox="0 0 40 37" fill="red" xmlns="http://www.w3.org/2000/svg">
-    <path id="Vector" d="M30.75 0.5C38.72 0.51 38.26 17.94 38.72 23.07C39.55 32.26 40.17 36.55 29.55 36.51C23.62 36.49 17.69 36.46 11.76 36.41C5.43003 36.36 3.47002 32.73 2.84002 26.76C2.21002 20.77 1.62002 14.79 1.06002 8.8C0.630021 4.17 2.20003 0.51 7.26003 0.5C15.08 0.5 22.91 0.5 30.75 0.5ZM13.87 18.77C11.44 20.45 10.46 22.7 10.94 25.53C11.03 26.05 11.49 26.43 12.02 26.42L22.46 26.14C27.59 27.15 29.46 25.16 28.08 20.18C27.97 19.79 27.4 19.15 26.37 18.24C28.77 16.42 29.81 14.26 29.48 11.75C29.37 10.92 28.66 10.29 27.82 10.3L17.89 10.37C11.85 8.82 9.50003 14.53 13.87 18.77Z" fill="#390053"/>
+<svg width="60px" height="60px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="g">
+		<stop stop-color="#f93f06" offset="0%"></stop>
+		<stop stop-color="#06f93f" offset="100%"></stop>
+		</linearGradient>
+	</defs>
+	<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+		<rect id="Rectangle" fill="url(#g)" x="0" y="0" width="80" height="80"></rect>
+	</g>
 </svg>
