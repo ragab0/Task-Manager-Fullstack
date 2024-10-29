@@ -4,7 +4,6 @@ import { imgs } from "@/assets/imgs";
 import { filterActions } from "@/toolkits/features/filter/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ReduxProvider from "../../providers/ReduxProvider";
-import Login from "../Login/Login";
 import Select from "../Select/Select";
 
 function SliceFilterBody({ nextHandler }) {
@@ -25,8 +24,6 @@ function SliceFilterBody({ nextHandler }) {
 
   return (
     <div>
-      <Login nextHandler={nextHandler} />
-      <div className="mt-8 mb-12 border-2 w-1/3 mx-auto border-slate-400 rounded-full"></div>
       <Select
         list={selectTimeFilter}
         img={imgs.date}

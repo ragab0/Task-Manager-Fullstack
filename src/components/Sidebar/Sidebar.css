@@ -1,0 +1,4 @@
+.sidebar a:hover,
+.sidebar button:hover {
+  @apply bg-slate-300;
+}

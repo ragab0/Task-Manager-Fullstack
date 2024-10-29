@@ -1,4 +1,7 @@
 import "./globals.css";
+import Footer from "@/components/Footer/Footer";
+import Sidebar from "@/components/Sidebar/Sidebar";
+import Modals from "@/components/Modals/Modals";
 
 export const metadata = {
   title: "Tod",
@@ -10,7 +13,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Modals />
+        <div id="root">
+          <main className="grid md:grid-cols-[300px_1fr] min-h-screen items-start">
+            <Sidebar />
+            <div className="body p-5 xs:p-10 overflow-hidden">{children}</div>
+          </main>
+          <Footer />
+        </div>
+      </body>
     </html>
   );
 }

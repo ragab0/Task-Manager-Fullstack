@@ -12,15 +12,14 @@ import sortNumberDown from "./sort-number-down.svg";
 import starLine from "./star-line.svg";
 import trash from "./trash.svg";
 import x from "./x.svg";
-import vector from "./Vector.svg"
-import list from "./list.svg"
-import sort from "./sort.svg"
-import admin from "./admin.svg"
+import vector from "./Vector.svg";
+import list from "./list.svg";
+import sort from "./sort.svg";
+import admin from "./admin.svg";
 
-import ViewSquares from "./ViewSquares.js"
-import ViewPaillers from "./ViewPaillers.js"
-import ViewBubbles from "./ViewBubbles.js"
-
+import ViewSquares from "./ViewSquares.js";
+import ViewPaillers from "./ViewPaillers.js";
+import ViewBubbles from "./ViewBubbles.js";
 
 // Nextjs disallowed the default obj export becuase that leaks nextjs principles;
 export const imgs = {
@@ -42,10 +41,10 @@ export const imgs = {
   list,
   sort,
   admin,
-}
+};
 
 export const svgs = {
   ViewSquares,
   ViewPaillers,
   ViewBubbles,
-}
+};
