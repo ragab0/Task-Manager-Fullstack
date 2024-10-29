@@ -85,4 +85,7 @@
   .active-main {
     @apply bg-mainClr text-[#394351];
   }
+  .border-second {
+    @apply border-slate-300;
+  }
 }

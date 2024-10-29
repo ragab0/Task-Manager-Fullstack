@@ -1,5 +1,35 @@
+import ProfileOverview from "@/components/ProfileOverview/ProfileOverview";
+import UserForm from "@/app/profile/components/UserForm/UserForm";
 import React from "react";
+import BoardsMine from "./components/BoardsMine/BoardsMine";
+import BoardsTemp from "./components/BoardsTemp/BoardsTemp";
+import TempBoardIcon from "@/assets/icons/TempBoard";
 
 export default function ProfilePage() {
-  return <div>ProfilePage</div>;
+  return (
+    <div className="profile-page">
+      <div className="profile-page-header py-8 grid grid-cols-2 justify-center border-b-2 border-second">
+        <ProfileOverview isProfiler={true} />
+        <UserForm />
+      </div>
+      <div className="profile-page-boards py-8 ">
+        <h2 className="text-xl mb-8">Boards</h2>
+        <div className="mb-4">
+          <div className="flex gap-2 items-center">
+            <i>
+              <TempBoardIcon />
+            </i>
+            <h3 className="text-xl mb-0">Most popular templates</h3>
+          </div>
+          <span className="block text-sm mt-1 mb-4">
+            Get going faster with a template:
+          </span>
+          <BoardsTemp />
+        </div>
+        <div className="mb-4">
+          <BoardsMine />
+        </div>
+      </div>
+    </div>
+  );
 }
