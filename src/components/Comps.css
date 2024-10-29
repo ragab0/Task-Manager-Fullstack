@@ -1,4 +1,0 @@
-/* Header comp */
-.progress::before {
-    transform: translateX(var(--progress, 0));
-}

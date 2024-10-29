@@ -2,27 +2,26 @@ export function getSortingVersion(tasks, by) {
   return tasks.sort((a, b) => {
     // const fullDate, isCompleted, title
     if (by === "newer") {
-      return new Date(Date.parse(b.fullDate)) - new Date(Date.parse(a.fullDate));
+      return (
+        new Date(Date.parse(b.fullDate)) - new Date(Date.parse(a.fullDate))
+      );
     } else if (by === "az") {
-      return (a.title < b.title) ? -1 : 1;
+      return a.title < b.title ? -1 : 1;
     } else if (by === "za") {
-      return (a.title > b.title) ? -1 : 1;
+      return a.title > b.title ? -1 : 1;
     } else if (by === "completed") {
-      return (a.isCompleted && !b.isCompleted) ? -1 : 1;
+      return a.isCompleted && !b.isCompleted ? -1 : 1;
     } else if (by === "uncompleted") {
-      return (!a.isCompleted && b.isCompleted) ? -1 : 1;
+      return !a.isCompleted && b.isCompleted ? -1 : 1;
     }
   });
 }
-
 
 // newer
 // az
 // za
 // completed
 // uncompleted
-
-
 
 /**
   {

@@ -13,7 +13,8 @@ const slideSlice = createSlice({
       state.maxSlides = action.payload;
     },
     currentSlideSetter: function (state) {
-      state.currentSlide = state.currentSlide+1 < state.maxSlides ? state.currentSlide + 1 : 0;
+      state.currentSlide =
+        state.currentSlide + 1 < state.maxSlides ? state.currentSlide + 1 : 0;
     },
   },
 });

@@ -32,7 +32,7 @@ const persistedReducer = persistReducer(
 
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: [thunk]
+  middleware: [thunk],
 });
 
 const persistedStore = persistStore(store);

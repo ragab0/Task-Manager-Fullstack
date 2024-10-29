@@ -1,8 +1,8 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import Slides from "@/components/Slides";
-import Tasks from "@/components/Tasks";
-import Modals from "@/components/Modals";
+import Footer from "@/components/Footer/Footer";
+import Header from "@/components/Header/Header";
+import Slides from "@/components/Slides/Slides";
+import Tasks from "@/components/Tasks/Tasks";
+import Modals from "@/components/Modals/Modals";
 // import Bot from "@/components/Bot";
 
 export default function home() {

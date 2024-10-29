@@ -14,7 +14,11 @@ const folderSlice = createSlice({
     },
     folderAddSubmitSetter: function (state) {
       const newFolder = String(state.addFolderField).toLocaleLowerCase();
-      if (newFolder && newFolder !== "all" && !state.folders.includes(newFolder)) {
+      if (
+        newFolder &&
+        newFolder !== "all" &&
+        !state.folders.includes(newFolder)
+      ) {
         state.folders.push(newFolder);
         state.addFolderField = "";
       }

@@ -2,7 +2,7 @@
 import { viewTypes } from "@/assets/data/data";
 import { useDispatch, useSelector } from "react-redux";
 import { filterActions } from "@/toolkits/features/filter/filterSlice";
-import ReduxProvider from "./ReduxProvider";
+import ReduxProvider from "../../providers/ReduxProvider";
 
 function ViewsBody() {
   const appDispatch = useDispatch();

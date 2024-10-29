@@ -1,7 +1,7 @@
 {
   "name": "tod",
-  "version": "2.0.1",
-  "private": true,
+  "version": "3.0.1",
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",

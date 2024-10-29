@@ -8,7 +8,7 @@ import { modalActions } from "@/toolkits/features/modal/modalSlice";
 import { getPeriodByName } from "@/utils/date";
 import { selectTimeFilter } from "@/assets/data/data";
 import Image from "next/image";
-import ReduxProvider from "./ReduxProvider";
+import ReduxProvider from "../../providers/ReduxProvider";
 import { getSortingVersion } from "@/utils/sort";
 
 function TasksBody() {
@@ -45,15 +45,15 @@ function TasksBody() {
     function () {
       const filteredPayload = tasksList.filter((task) => {
         let cDateVal = String(currentDate).toLocaleLowerCase(),
-            cSearch = String(currentSearch).toLocaleLowerCase(),
-            cDir = String(currentDir).toLocaleLowerCase();
+          cSearch = String(currentSearch).toLocaleLowerCase(),
+          cDir = String(currentDir).toLocaleLowerCase();
         let taskFolder = String(task.folder).toLocaleLowerCase(),
-            taskTitle = String(task.title).toLocaleLowerCase(),
-            taskDate = new Date(Date.parse(task.fullDate));
+          taskTitle = String(task.title).toLocaleLowerCase(),
+          taskDate = new Date(Date.parse(task.fullDate));
 
         return (
           (cDateVal === "all" || taskDate >= getPeriodByName(cDateVal)) &&
-          (taskTitle.includes(cSearch)) &&
+          taskTitle.includes(cSearch) &&
           (cDir === "all" || cDir === taskFolder)
         );
       });
@@ -77,7 +77,7 @@ function TasksBody() {
               currentView === "squares"
                 ? "w-full lg:w-[calc(50%-10px)] xl:w-[calc(33.3333%-13.3333px)] 2xl:w-[calc(25%-15px)] "
                 : "w-full"
-            } 
+            }
               overflow-hidden grid grid-rows-[1fr_auto] p-5 pb-3 min-h-[250px] rounded-md shadow-md hover:shadow-lg`}
             style={{ backgroundColor: clr || "transparent" }}
           >

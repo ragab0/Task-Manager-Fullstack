@@ -1,8 +1,7 @@
 "use client";
 import Image from "next/image";
 import FileSaver from "file-saver";
-import store from "@/toolkits/store";
-import ReduxProvider from "./ReduxProvider";
+import ReduxProvider from "../../providers/ReduxProvider";
 import { useDispatch, useSelector } from "react-redux";
 import { accountFields } from "@/assets/data/data";
 import { imgs } from "@/assets/imgs";
@@ -10,7 +9,7 @@ import { userActions } from "@/toolkits/features/user/userSlice";
 import { mainActions } from "@/toolkits/features/main/mainSlice";
 const { x } = imgs;
 
-function SliceUserFormBody({ nextHandler }) {
+function UserFormComp({ nextHandler }) {
   const appDispatch = useDispatch();
   const { version } = useSelector((state) => state.main);
   const { userFormData } = useSelector((state) => state.user);
@@ -60,8 +59,10 @@ function SliceUserFormBody({ nextHandler }) {
         <span className="block">Save your data</span>
         local version
       </button>
-      <label className=" my-2 w-full h-[100px] bg-slate-200 cursor-pointer flex justify-center items-center
-       border-dashed border-2 border-gray-400">
+      <label
+        className=" my-2 w-full h-[100px] bg-slate-200 cursor-pointer flex justify-center items-center
+       border-dashed border-2 border-gray-400"
+      >
         Upload data file
         <input type="file" className="hidden" />
       </label>
@@ -69,10 +70,10 @@ function SliceUserFormBody({ nextHandler }) {
   );
 }
 
-export default function SliceUserForm({ nextHandler }) {
+export default function UserForm({ nextHandler }) {
   return (
     <ReduxProvider>
-      <SliceUserFormBody nextHandler={nextHandler} />
+      <UserFormComp nextHandler={nextHandler} />
     </ReduxProvider>
   );
 }

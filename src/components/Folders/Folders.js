@@ -2,11 +2,11 @@
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterActions } from "@/toolkits/features/filter/filterSlice";
-import ReduxProvider from "./ReduxProvider";
+import ReduxProvider from "../../providers/ReduxProvider";
 
 function FoldersBody() {
   const appDispatch = useDispatch();
-  const { isResetting } = useSelector(state => state.filter);
+  const { isResetting } = useSelector((state) => state.filter);
 
   const backedRefChecker = useRef(null);
   const backedRef = useRef(null);
@@ -21,11 +21,7 @@ function FoldersBody() {
 
   function enterHandler(e) {
     const ch = backedRefChecker.current;
-    const {
-      offsetWidth: w,
-      offsetHeight: h,
-      offsetLeft: l,
-    } = e.target;
+    const { offsetWidth: w, offsetHeight: h, offsetLeft: l } = e.target;
     ch.style.width = w + "px";
     ch.style.height = h + "px";
     ch.style.left = l + "px";
@@ -41,23 +37,22 @@ function FoldersBody() {
   function clickHandler(e) {
     firstItemRef.current.classList.remove("active-main");
     const c = backedRef.current;
-    const {
-      offsetWidth: w,
-      offsetHeight: h,
-      offsetLeft: l,
-    } = e.target;
+    const { offsetWidth: w, offsetHeight: h, offsetLeft: l } = e.target;
     c.style.opacity = 1;
     c.style.width = w + "px";
     c.style.height = h + "px";
     c.style.left = l + "px";
   }
 
-  useEffect(function() {
-    const c = backedRef.current;
-    c.style.left = 0;
-    c.style.width = firstItemRef.current.offsetWidth + "px";
-    c.style.height = firstItemRef.current.offsetHeight + "px";
-  }, [isResetting])
+  useEffect(
+    function () {
+      const c = backedRef.current;
+      c.style.left = 0;
+      c.style.width = firstItemRef.current.offsetWidth + "px";
+      c.style.height = firstItemRef.current.offsetHeight + "px";
+    },
+    [isResetting]
+  );
 
   return (
     <div className="folders overflow-auto">

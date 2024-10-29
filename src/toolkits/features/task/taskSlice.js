@@ -28,7 +28,9 @@ const taskSlice = createSlice({
       state.taskFormData = action.payload;
     },
     taskEditingSubmittingSetter: function (state) {
-      state.tasksList = state.tasksList.map(t => t.id === state.taskFormData.id ? state.taskFormData : t);
+      state.tasksList = state.tasksList.map((t) =>
+        t.id === state.taskFormData.id ? state.taskFormData : t
+      );
       state.taskFormData = Task.getInitialTaskFormData();
     },
     taskIsEdditingSetter: function (state, action) {
@@ -40,10 +42,12 @@ const taskSlice = createSlice({
           task.isCompleted = !task.isCompleted;
         }
         return task;
-      })
+      });
     },
     taskRemoverSetter: function (state, action) {
-      state.tasksList = state.tasksList.filter(({id}, i) => id != action.payload);
+      state.tasksList = state.tasksList.filter(
+        ({ id }, i) => id != action.payload
+      );
     },
     currentTasksListSetter: function (state, action) {
       console.log("### Dispatching currentTasksList");

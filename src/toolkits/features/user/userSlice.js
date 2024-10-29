@@ -1,4 +1,4 @@
-const { User } = require("./userObject")
+const { User } = require("./userObject");
 const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {

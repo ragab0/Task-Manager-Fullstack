@@ -8,7 +8,9 @@ function getFirstDayOfWeek() {
   const currentDate = new Date();
   currentDate.setHours(0, 0, 0, 0);
   const currentDay = currentDate.getDay();
-  const firstDayOfWeek = new Date(currentDate.setDate(currentDate.getDate() - currentDay - 1));
+  const firstDayOfWeek = new Date(
+    currentDate.setDate(currentDate.getDate() - currentDay - 1)
+  );
   return firstDayOfWeek;
 }
 

@@ -1,7 +1,7 @@
 "use client";
-import SliceFilter from "./SliceFilter";
-import SliceUserForm from "./SliceUserForm";
-import ReduxProvider from "./ReduxProvider";
+import SliceFilter from "../FilterSection/FilterSection";
+import SliceUserForm from "../UserForm/UserForm";
+import ReduxProvider from "../../providers/ReduxProvider";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { slideActions } from "@/toolkits/features/slide/slideSlice";

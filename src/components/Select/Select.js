@@ -11,7 +11,7 @@ export default function Select({
   img = null,
   label = "",
   dispacher,
-  isResetting = 0
+  isResetting = 0,
 }) {
   // List should consists here from obj of name and the value props
   const initialState = {
@@ -36,15 +36,19 @@ export default function Select({
     dispacher(curr.value);
   }
 
-  useEffect(function() {
-    setSelect(initialState);
-  }, [isResetting])
+  useEffect(
+    function () {
+      setSelect(initialState);
+    },
+    [isResetting]
+  );
 
-  useEffect(function() {
-    list.map((curr, i) => (
-      curr.value === selectState.current.value && choiceHandler(curr)
-    ))
-  }, [])
+  useEffect(function () {
+    list.map(
+      (curr, i) =>
+        curr.value === selectState.current.value && choiceHandler(curr)
+    );
+  }, []);
 
   const { isOpen, current } = selectState;
   const { name } = current || {};

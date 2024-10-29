@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { folderActions } from "@/toolkits/features/folder/folderSlice";
 import { modalActions } from "@/toolkits/features/modal/modalSlice";
-import ModalHeader from "./ModalHeader";
+import ModalHeader from "../ModalHeader/ModalHeader";
 
 export default function ModalAddFolder({ closeHandler }) {
   const appDispatch = useDispatch();

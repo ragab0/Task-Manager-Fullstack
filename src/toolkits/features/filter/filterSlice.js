@@ -28,14 +28,14 @@ const filterSlice = createSlice({
     currentSearchSetter: function (state, action) {
       state.currentSearch = action.payload;
     },
-    resetFilter: function(state) {
-      state.currentDate = initialState.currentDate,
-      state.currentDir = initialState.currentDir,
-      state.currentSort = initialState.currentSort,
-      state.currentView = initialState.currentView,
-      state.currentSearch = initialState.currentSearch
+    resetFilter: function (state) {
+      (state.currentDate = initialState.currentDate),
+        (state.currentDir = initialState.currentDir),
+        (state.currentSort = initialState.currentSort),
+        (state.currentView = initialState.currentView),
+        (state.currentSearch = initialState.currentSearch);
       state.isResetting++;
-    }
+    },
   },
 });
 

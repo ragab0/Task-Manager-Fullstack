@@ -1,7 +1,7 @@
 "use client";
 import { useDispatch } from "react-redux";
 import { modalActions } from "@/toolkits/features/modal/modalSlice";
-import ReduxProvider from "./ReduxProvider";
+import ReduxProvider from "../../providers/ReduxProvider";
 
 function AddFolderBtnBody() {
   const appDispatch = useDispatch();
@@ -12,7 +12,7 @@ function AddFolderBtnBody() {
 
   return (
     <div className="px-[18px]">
-      <button 
+      <button
         className="w-11 h-11 rounded-full bg-slate-100 text-xl"
         onClick={addFolderHandler}
       >

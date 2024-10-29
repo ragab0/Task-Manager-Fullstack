@@ -2,8 +2,8 @@
 import { taskActions } from "@/toolkits/features/task/taskSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "@/toolkits/features/modal/modalSlice";
-import ModalHeader from "./ModalHeader";
-import Select from "./Select";
+import ModalHeader from "../ModalHeader/ModalHeader";
+import Select from "../Select/Select";
 
 export default function ModalTaskForm({ closeHandler }) {
   const appDispatch = useDispatch();
@@ -24,18 +24,18 @@ export default function ModalTaskForm({ closeHandler }) {
   }
 
   function selectOptionsHandler(val) {
-    appDispatch(taskActions.taskFormDataSetter({
-      name: "folder", 
-      value: val,
-    }));
+    appDispatch(
+      taskActions.taskFormDataSetter({
+        name: "folder",
+        value: val,
+      })
+    );
   }
 
   function selectListHandler() {
-    return (
-      folders
+    return folders
       .map((f) => ({ name: f }))
-      .sort((a, b) => a.name === folder ? -1 : b.name === folder ? 1 : 0)
-    )
+      .sort((a, b) => (a.name === folder ? -1 : b.name === folder ? 1 : 0));
   }
 
   function addFolderHandler() {
@@ -97,7 +97,10 @@ export default function ModalTaskForm({ closeHandler }) {
           <label htmlFor="selectFolder">select folder</label>
           <div className="flex gap-2 items-start mt-1">
             <div className="w-full">
-              <Select list={selectListHandler()} dispacher={selectOptionsHandler} />
+              <Select
+                list={selectListHandler()}
+                dispacher={selectOptionsHandler}
+              />
             </div>
             <button
               className="w-10 h-10 mt-2 rounded-full bg-white text-xl"

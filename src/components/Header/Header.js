@@ -1,15 +1,15 @@
 "use client";
-import Folders from "./Folders";
-import Views from "./Views";
-import AddFolderBtn from "./AddFolderBtn";
+import "./Header.css";
+import Folders from "../Folders/Folders";
+import Views from "../Views/Views";
+import AddFolderBtn from "../AddFolderBtn/AddFolderBtn";
 import Image from "next/image";
-import ReduxProvider from "./ReduxProvider";
+import ReduxProvider from "../../providers/ReduxProvider";
 import { useEffect, useRef } from "react";
 import { imgs } from "@/assets/imgs";
 import { useDispatch, useSelector } from "react-redux";
 import { filterActions } from "@/toolkits/features/filter/filterSlice";
 import { mainActions } from "@/toolkits/features/main/mainSlice";
-import "./Comps.css";
 
 const { menu, x: close } = imgs;
 
@@ -83,8 +83,10 @@ function HeaderBody() {
         <p
           ref={progressRef}
           data-length={currentLength}
-          style={{"--progress": currentProgress / currentLength * 100 + "%"}}
-          className="p-2 progress w-full bg-slate-300 rounded-xl relative overflow-hidden 
+          style={{
+            "--progress": (currentProgress / currentLength) * 100 + "%",
+          }}
+          className="p-2 progress w-full bg-slate-300 rounded-xl relative overflow-hidden
           before:w-full before:right-0 before:transition-transform
           before:bg-mainClrLight before:absolute before:rounded-xl before:-left-full before:top-0 before:h-full "
         ></p>

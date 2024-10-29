@@ -5,10 +5,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "@/toolkits/features/modal/modalSlice";
 import { useEffect } from "react";
-import ReduxProvider from "./ReduxProvider";
+import ReduxProvider from "../../providers/ReduxProvider";
 
-import ModalAddFolder from "@/components/ModalAddFolder";
-import ModalTaskForm from "@/components/ModalTaskForm";
+import ModalAddFolder from "@/components/ModalAddFolder/ModalAddFolder";
+import ModalTaskForm from "@/components/ModalTaskForm/ModalTaskForm";
 
 export const dataModals = {
   addFolder: {
@@ -22,7 +22,7 @@ export const dataModals = {
 function ModalsBody() {
   const { modalList } = useSelector((state) => state.modal);
   const appDispatch = useDispatch();
-  
+
   function closeHandler() {
     appDispatch(modalActions.modalRemoveRear());
   }

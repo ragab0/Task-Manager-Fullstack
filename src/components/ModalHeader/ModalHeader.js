@@ -11,7 +11,7 @@ export default function ModalHeader({ children, heading, closeHandler }) {
   return (
     <div
       onClick={mouseCloserHandler}
-      className="modal min-h-[250px] cursor-pointer px-4 py-8 flex 
+      className="modal min-h-[250px] cursor-pointer px-4 py-8 flex
       justify-center items-center bg-black/40 fixed top-0 left-0 w-full h-full z-50"
     >
       <div className="box cursor-default max-w-lg w-full overflow-auto bg-slate-100 p-5 rounded-md">
