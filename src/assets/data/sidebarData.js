@@ -11,27 +11,38 @@ export const views = [
 export const boards = [
   {
     name: "board1",
-    link: "/board/123456",
+    link: "/board/board1",
     linearUrl: "/colors/ocean.svg",
   },
   {
     name: "board2",
-    link: "/board/2345678",
+    link: "/board/board2",
     linearUrl: "/colors/ocean.svg",
   },
   {
-    name: "board2",
-    link: "/board/2345678",
+    name: "board3",
+    link: "/board/board3",
     linearUrl: "/colors/ocean.svg",
   },
   {
-    name: "board2",
-    link: "/board/2345678",
+    name: "board4",
+    link: "/board/board4",
     linearUrl: "/colors/ocean.svg",
   },
   {
-    name: "board2",
-    link: "/board/2345678",
+    name: "board5",
+    link: "/board/board5",
+    linearUrl: "/colors/ocean.svg",
+  },
+  ,
+  {
+    name: "board6",
+    link: "/board/board6",
+    linearUrl: "/colors/ocean.svg",
+  },
+  {
+    name: "board7",
+    link: "/board/board7",
     linearUrl: "/colors/ocean.svg",
   },
 ];

@@ -1,22 +1,53 @@
+"use client";
 import { boards } from "@/assets/data/sidebarData";
+import { modalActions } from "@/toolkits/features/modal/modalSlice";
+import { useDispatch } from "react-redux";
 import Link from "next/link";
+import ReduxProvider from "@/providers/ReduxProvider";
 
-export default function BoardsMine() {
+function BoardsMineComp() {
+  const appDispatch = useDispatch();
+
+  function addFolderHandler() {
+    appDispatch(modalActions.modalAddBoardSetter());
+  }
+
   return (
     <div>
-      <ul className="grid grid-cols-[] gap-4">
+      <ul
+        className="profile-page-boards-mine grid gap-4"
+        style={{
+          gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+        }}
+      >
         {boards.map(({ name, link, linearUrl }, i) => (
           <li key={i}>
             <Link
               href={link}
               style={{ backgroundImage: `url(${linearUrl})` }}
-              className="p-2 block min-h-[100px] font-bold text-white capitalize rounded-[.25rem]"
+              className="p-2 block min-h-[100px] h-full font-bold text-white capitalize rounded-[.25rem]"
             >
               {name}
             </Link>
           </li>
         ))}
+        <li>
+          <button
+            className="p-2 block min-h-[100px] w-full h-full font-bold capitalize rounded-[.25rem] bg-slate-100"
+            onClick={addFolderHandler}
+          >
+            {"+"}
+          </button>
+        </li>
       </ul>
     </div>
+  );
+}
+
+export default function BoardsMine() {
+  return (
+    <ReduxProvider>
+      <BoardsMineComp />
+    </ReduxProvider>
   );
 }

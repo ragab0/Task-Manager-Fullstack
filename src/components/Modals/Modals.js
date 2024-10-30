@@ -1,6 +1,5 @@
 "use client";
-// All modals are rendered in client-side from here;
-// They also inherit the redux provider from here;
+// All modals are rendered in client-side;
 
 import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "@/toolkits/features/modal/modalSlice";
@@ -9,10 +8,14 @@ import ReduxProvider from "../../providers/ReduxProvider";
 
 import ModalAddFolder from "@/components/ModalAddFolder/ModalAddFolder";
 import ModalTaskForm from "@/components/ModalTaskForm/ModalTaskForm";
+import ModalBoardForm from "../ModalBoardForm/ModalBoardForm";
 
 export const dataModals = {
   addFolder: {
     Comp: ModalAddFolder,
+  },
+  addBoard: {
+    Comp: ModalBoardForm,
   },
   taskForm: {
     Comp: ModalTaskForm,

@@ -2,12 +2,14 @@ export class User {
   static createInitialUserFormData(
     name = "Legend",
     bio = "fron-end developer",
-    email = ""
+    email = "",
+    photo = ""
   ) {
     return {
       name,
       bio,
       email,
+      photo,
     };
   }
 

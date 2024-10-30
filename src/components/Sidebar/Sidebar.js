@@ -12,7 +12,7 @@ function SlidesBody() {
 
   return (
     <aside
-      className={`sidebar ${
+      className={`sidebar basis-[300px] ${
         isSettings ? "left-0" : "-left-full"
       } md:p-5 fixed top-0  h-screen md:sticky md:left-0 grid z-[49]`}
     >

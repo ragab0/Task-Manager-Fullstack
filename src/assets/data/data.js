@@ -64,11 +64,17 @@ export const accountFields = [
   {
     name: "name",
     type: "text",
+    mandatory: true,
   },
   {
     name: "bio",
     type: "text",
+    mandatory: true,
   },
+  // {
+  //   name: "photo",
+  //   type: "url",
+  // },
   // {
   //   name: "email",
   //   type: "email",

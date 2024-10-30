@@ -9,9 +9,13 @@ const modalSlice = createSlice({
   initialState,
   reducers: {
     modalAddFolderSetter: function (state) {
-      console.log(122);
       if (state.modalList.at(-1) !== "addFolder") {
         state.modalList.push("addFolder");
+      }
+    },
+    modalAddBoardSetter: function (state) {
+      if (state.modalList.at(-1) !== "addBoard") {
+        state.modalList.push("addBoard");
       }
     },
     modalTaskFormSetter: function (state) {

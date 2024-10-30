@@ -16,9 +16,11 @@ export default function RootLayout({ children }) {
       <body>
         <Modals />
         <div id="root">
-          <main className="grid md:grid-cols-[300px_1fr] min-h-screen items-start">
+          <main className="flex min-h-screen items-start">
             <Sidebar />
-            <div className="body p-5 xs:p-10 overflow-hidden">{children}</div>
+            <div className="body basis-full p-5 xs:p-10 overflow-hidden">
+              {children}
+            </div>
           </main>
           <Footer />
         </div>

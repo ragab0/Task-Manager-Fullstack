@@ -1,23 +1,43 @@
-import React from "react";
+"use client";
+import FileSaver from "file-saver";
+import ReduxProvider from "@/providers/ReduxProvider";
+import { mainActions } from "@/toolkits/features/main/mainSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function Settings() {
+function SettingsComp() {
+  const appDispatch = useDispatch();
+  const { version } = useSelector((state) => state.main);
+  async function copyHandler(e) {
+    const blob = new Blob([localStorage.getItem("persist:tod")], {
+      type: "application/json",
+    });
+    FileSaver.saveAs(blob, `Tasks_V${String(version).padStart(2, 0)}`);
+    appDispatch(mainActions.appVersionSetter());
+  }
+
   return (
-    <div className="settings">
-      <div className="my-8 border-2 w-1/3 mx-auto border-slate-400 rounded-full"></div>
+    <div className="settings mt-8 underline text-sm font-bold">
       <button
-        className="underline py-2 block mx-auto text-green-500"
+        className="py-2 block w-full h-[75px] border-2 border-dashed border-second"
         onClick={copyHandler}
       >
-        <span className="block">Save your data</span>
-        local version
+        <span className="block">Save local version</span>
       </button>
       <label
-        className=" my-2 w-full h-[100px] bg-slate-200 cursor-pointer flex justify-center items-center
-       border-dashed border-2 border-gray-400"
+        className="mt-4 w-full h-[75px] cursor-pointer flex justify-center items-center
+       border-dashed border-2 border-second"
       >
-        Upload data file
+        Upload local version
         <input type="file" className="hidden" />
       </label>
     </div>
+  );
+}
+
+export default function Settings() {
+  return (
+    <ReduxProvider>
+      <SettingsComp />
+    </ReduxProvider>
   );
 }

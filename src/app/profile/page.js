@@ -4,12 +4,15 @@ import React from "react";
 import BoardsMine from "./components/BoardsMine/BoardsMine";
 import BoardsTemp from "./components/BoardsTemp/BoardsTemp";
 import TempBoardIcon from "@/assets/icons/TempBoard";
+import Settings from "./components/Settings/Settings";
 
 export default function ProfilePage() {
   return (
     <div className="profile-page">
-      <div className="profile-page-header py-8 grid grid-cols-2 justify-center border-b-2 border-second">
-        <ProfileOverview isProfiler={true} />
+      <div className="profile-page-header py-8 grid grid-cols-2 justify-center border-y-2 border-second">
+        <div>
+          <ProfileOverview isProfiler={true} />
+        </div>
         <UserForm />
       </div>
       <div className="profile-page-boards py-8 ">
@@ -29,6 +32,10 @@ export default function ProfilePage() {
         <div className="mb-4">
           <BoardsMine />
         </div>
+      </div>
+      <div className="profile-page-settings py-8 border-t-2 border-second">
+        <h2 className="text-xl mb-8">Settings</h2>
+        <Settings />
       </div>
     </div>
   );
