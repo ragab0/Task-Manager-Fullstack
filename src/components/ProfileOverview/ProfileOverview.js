@@ -26,23 +26,19 @@ function ProfileOverviewComp({ isProfiler = false }) {
         {isProfiler ? (
           <div className="rounded-full overflow-hidden w-[60px] h-[60px]">
             {/* USING img instead of Image becuase the src of url isn't predictiable as Image requires */}
-            <img
-              src={photo || vector}
-              alt="profile-img"
-              // width={60}
-              // height={60}
-              className="w-full h-full"
-            />
+            {photo ? (
+              <img src={photo} alt="profile-img" className="w-full h-full" />
+            ) : (
+              <Image alt="profile-img" width={60} height={60} src={vector} />
+            )}
           </div>
         ) : (
           <Link href="/" className="rounded-full overflow-hidden w-7 h-7">
-            <img
-              src={photo || vector}
-              alt="profile-img"
-              // width={"28px"}
-              // height={"28px"}
-              className="w-full h-full"
-            />
+            {photo ? (
+              <img src={vector} alt="profile-img" className="w-full h-full" />
+            ) : (
+              <Image alt="profile-img" width={28} height={28} src={vector} />
+            )}
           </Link>
         )}
         <figcaption className="overflow-hidden">
