@@ -38,7 +38,7 @@ function SlidesBody() {
         {/* boards section */}
         <section>
           <h2 className="text-sm capitalize py-2 px-3 mb-0 flex justify-between items-center">
-            your boards
+            my boards
             <button className="p-1 rounded-[4px]">
               <Plus width={16} height={16} />
             </button>

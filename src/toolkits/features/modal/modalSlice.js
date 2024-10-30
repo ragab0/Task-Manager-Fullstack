@@ -18,6 +18,16 @@ const modalSlice = createSlice({
         state.modalList.push("addBoard");
       }
     },
+    modalAddTempKanbanBoard: function (state) {
+      if (state.modalList.at(-1) !== "addTempKanbanBoard") {
+        state.modalList.push("addTempKanbanBoard");
+      }
+    },
+    modalAddTempBasicBoard: function (state) {
+      if (state.modalList.at(-1) !== "addTempBasicBoard") {
+        state.modalList.push("addTempBasicBoard");
+      }
+    },
     modalTaskFormSetter: function (state) {
       if (state.modalList.at(-1) !== "taskForm") {
         state.modalList.push("taskForm");

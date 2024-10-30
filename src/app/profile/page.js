@@ -22,18 +22,24 @@ export default function ProfilePage() {
             <i>
               <TempBoardIcon />
             </i>
-            <h3 className="text-xl mb-0">Most popular templates</h3>
+            <h3 className="text-lg mb-0">Most popular templates</h3>
           </div>
           <span className="block text-sm mt-1 mb-4">
             Get going faster with a template:
           </span>
           <BoardsTemp />
         </div>
-        <div className="mb-4">
+        <div className="mt-8">
+          <div className="flex gap-2 items-center mb-4">
+            <i>
+              <TempBoardIcon />
+            </i>
+            <h3 className="text-lg mb-0">My boards</h3>
+          </div>
           <BoardsMine />
         </div>
       </div>
-      <div className="profile-page-settings py-8 border-t-2 border-second">
+      <div className="profile-page-settings py-8 mt-3 border-t-2 border-second">
         <h2 className="text-xl mb-8">Settings</h2>
         <Settings />
       </div>

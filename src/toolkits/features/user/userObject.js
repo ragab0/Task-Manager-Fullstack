@@ -8,7 +8,6 @@ export class User {
     return {
       name,
       bio,
-      email,
       photo,
     };
   }

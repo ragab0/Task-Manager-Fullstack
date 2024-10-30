@@ -1,4 +1,4 @@
-const { createSlice } = require("@reduxjs/toolkit");
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   folders: ["main", "projects", "daily"],
@@ -26,5 +26,5 @@ const folderSlice = createSlice({
   },
 });
 
-module.exports = folderSlice.reducer;
-module.exports.folderActions = folderSlice.actions;
+export default folderSlice.reducer;
+export const folderActions = folderSlice.actions;

@@ -17,6 +17,12 @@ export const dataModals = {
   addBoard: {
     Comp: ModalBoardForm,
   },
+  addTempKanbanBoard: {
+    Comp: () => <ModalBoardForm isTempBaordType={"kanban"} />,
+  },
+  addTempBasicBoard: {
+    Comp: () => <ModalBoardForm isTempBaordType={"basic"} />,
+  },
   taskForm: {
     Comp: ModalTaskForm,
   },
@@ -25,10 +31,6 @@ export const dataModals = {
 function ModalsBody() {
   const { modalList } = useSelector((state) => state.modal);
   const appDispatch = useDispatch();
-
-  function closeHandler() {
-    appDispatch(modalActions.modalRemoveRear());
-  }
 
   useEffect(() => {
     function handleKeyDown(e) {
@@ -46,7 +48,7 @@ function ModalsBody() {
     <div>
       {modalList.map((name, i) => {
         const Comp = dataModals[name].Comp;
-        return <Comp key={i} closeHandler={closeHandler} />;
+        return <Comp key={i} />;
       })}
     </div>
   );

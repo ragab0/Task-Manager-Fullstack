@@ -3,15 +3,11 @@ import "./Header.css";
 import Folders from "../Folders/Folders";
 import Views from "../Views/Views";
 import AddFolderBtn from "../AddFolderBtn/AddFolderBtn";
-import Image from "next/image";
 import ReduxProvider from "../../providers/ReduxProvider";
 import { useEffect, useRef } from "react";
-import { imgs } from "@/assets/imgs";
 import { useDispatch, useSelector } from "react-redux";
 import { filterActions } from "@/toolkits/features/filter/filterSlice";
 import { mainActions } from "@/toolkits/features/main/mainSlice";
-
-const { menu, x: close } = imgs;
 
 function HeaderBody() {
   const appDispatch = useDispatch();
@@ -25,10 +21,6 @@ function HeaderBody() {
 
   function searchHandler(e) {
     appDispatch(filterActions.currentSearchSetter(e.target.value));
-  }
-
-  function menuHandler(value) {
-    appDispatch(mainActions.appIsSettingsSetter(!isSettings));
   }
 
   useEffect(
@@ -67,12 +59,9 @@ function HeaderBody() {
           placeholder="Searching about task.."
           className="p-4 rounded-2xl overflow-hidden bg-slate-100 w-full"
         />
-        <button onClick={menuHandler} className="md:hidden w-12 h-12 p-2">
-          <Image alt="settings" src={isSettings ? close : menu} />
-        </button>
       </section>
       <section className="my-10 w-fit">
-        <h2>👋 Welcome, {name}!</h2>
+        <h2 className=" capitalize">👋 Welcome, {name}!</h2>
         <p className=" font-bold mb-2">
           You had completeed
           <span className=" inline-block indent-2 text-xl font-bold text-mainClr">

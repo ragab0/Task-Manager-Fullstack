@@ -1,9 +1,16 @@
 import Image from "next/image";
 import { imgs } from "@/assets/imgs";
+import { modalActions } from "@/toolkits/features/modal/modalSlice";
+import { useDispatch } from "react-redux";
 
 const { x } = imgs;
 
-export default function ModalHeader({ children, heading, closeHandler }) {
+export default function ModalHeader({ children, heading }) {
+  const dispatch = useDispatch();
+  function closeHandler() {
+    dispatch(modalActions.modalRemoveRear());
+  }
+
   function mouseCloserHandler(e) {
     e.target.closest(".box") || closeHandler();
   }
@@ -24,7 +31,7 @@ export default function ModalHeader({ children, heading, closeHandler }) {
             <Image alt="close" src={x} />
           </button>
         </header>
-        <main className="content animate-slideDown">{children}</main>
+        <main className="content">{children}</main>
       </div>
     </div>
   );

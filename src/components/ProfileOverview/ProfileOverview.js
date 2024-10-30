@@ -8,7 +8,7 @@ import { imgs } from "@/assets/imgs/index";
 const { vector, admin } = imgs;
 
 function ProfileOverviewComp({ isProfiler = false }) {
-  const { name, bio } = useSelector((state) => state.user.userFormData);
+  const { name, bio, photo } = useSelector((state) => state.user.userFormData);
 
   return (
     <section
@@ -25,14 +25,20 @@ function ProfileOverviewComp({ isProfiler = false }) {
       >
         {isProfiler ? (
           <Image
-            src={vector}
+            src={photo || vector}
             alt="profile-img"
             width={60}
+            height={60}
             className="rounded-full"
           />
         ) : (
           <Link href="/" className="rounded-full overflow-hidden">
-            <Image src={vector} alt="profile-img" width={28} />
+            <Image
+              src={photo || vector}
+              alt="profile-img"
+              width={28}
+              height={28}
+            />
           </Link>
         )}
         <figcaption className="overflow-hidden">

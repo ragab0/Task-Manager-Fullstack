@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { folderActions } from "@/toolkits/features/folder/folderSlice";
 import { modalActions } from "@/toolkits/features/modal/modalSlice";
 import ModalHeader from "../ModalHeader/ModalHeader";
+import { toast } from "react-toastify";
 
 export default function ModalAddFolder({ closeHandler }) {
   const appDispatch = useDispatch();
@@ -13,14 +14,14 @@ export default function ModalAddFolder({ closeHandler }) {
   }
 
   function submitHandler(e) {
-    console.log("sss");
     e.preventDefault();
     appDispatch(folderActions.folderAddSubmitSetter());
     appDispatch(modalActions.modalRemoveRear());
+    toast.success("Folder added!");
   }
 
   return (
-    <ModalHeader heading={"Add folder"} closeHandler={closeHandler}>
+    <ModalHeader heading={"Add folder"}>
       <div
         // onSubmit={submitHandler}
         className="task-from content-start text-start capitalize"

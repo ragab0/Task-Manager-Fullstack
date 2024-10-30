@@ -8,7 +8,7 @@ import ReduxProvider from "@/providers/ReduxProvider";
 function BoardsMineComp() {
   const appDispatch = useDispatch();
 
-  function addFolderHandler() {
+  function addBoardHandler() {
     appDispatch(modalActions.modalAddBoardSetter());
   }
 
@@ -33,8 +33,9 @@ function BoardsMineComp() {
         ))}
         <li>
           <button
-            className="p-2 block min-h-[100px] w-full h-full font-bold capitalize rounded-[.25rem] bg-slate-100"
-            onClick={addFolderHandler}
+            className="p-2 block min-h-[100px] w-full h-full font-bold capitalize rounded-[.25rem]
+            bg-slate-100 shadow-md hover:bg-opacity-5"
+            onClick={addBoardHandler}
           >
             {"+"}
           </button>

@@ -55,10 +55,7 @@ export default function ModalTaskForm({ closeHandler }) {
   console.log(date, "##################");
 
   return (
-    <ModalHeader
-      heading={isTaskEditted ? "Edit" : "add" + " task"}
-      closeHandler={closeHandler}
-    >
+    <ModalHeader heading={isTaskEditted ? "Edit" : "add" + " task"}>
       {/*  onSubmit={submitHandler} alhtough e.preventDefault() called, THere is problems with form ... */}
       <div className="task-from content-start text-start capitalize">
         <label>

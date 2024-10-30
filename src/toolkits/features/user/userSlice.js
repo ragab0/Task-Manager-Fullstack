@@ -1,8 +1,13 @@
+const { toast } = require("react-toastify");
 const { User } = require("./userObject");
 const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
-  userFormData: User.getInitialUserFormData(),
+  userFormData: {
+    name: "",
+    bio: "",
+    photo: "",
+  },
   isSettings: true,
 };
 
@@ -11,8 +16,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     userFormDataSetter: function (state, action) {
-      state.version++;
-      state.userFormData[action.payload.name] = action.payload.value;
+      state.userFormData = action.payload;
     },
   },
 });

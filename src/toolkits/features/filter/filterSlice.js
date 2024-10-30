@@ -1,4 +1,4 @@
-const { createSlice } = require("@reduxjs/toolkit");
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentDate: "all",
@@ -39,5 +39,5 @@ const filterSlice = createSlice({
   },
 });
 
-module.exports = filterSlice.reducer;
-module.exports.filterActions = filterSlice.actions;
+export default filterSlice.reducer;
+export const filterActions = filterSlice.actions;

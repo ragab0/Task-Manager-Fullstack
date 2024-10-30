@@ -49,12 +49,14 @@ export const boards = [
 
 export const boardsTempData = [
   {
+    type: "basic",
     name: "basic board",
     link: "/temp-board",
     linearUrl: "/colors/ocean.svg",
     bgOverview: "rgb(0, 121, 191)",
   },
   {
+    type: "kanban",
     name: "kanban board",
     link: "/temp-board?type=kanban",
     linearUrl: "/colors/ocean.svg",

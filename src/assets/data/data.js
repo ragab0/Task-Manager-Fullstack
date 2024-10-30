@@ -71,12 +71,39 @@ export const accountFields = [
     type: "text",
     mandatory: true,
   },
-  // {
-  //   name: "photo",
-  //   type: "url",
-  // },
+  {
+    name: "photo",
+    type: "url",
+  },
   // {
   //   name: "email",
   //   type: "email",
   // },
+];
+
+export const boardFields = [
+  // {
+  //   label: "background color",
+  //   name: "bgColor",
+  //   type: "color",
+  // },
+  {
+    label: "board title",
+    name: "title",
+    type: "text",
+    mandatory: true,
+  },
+  {
+    label: "board type",
+    name: "type",
+    type: "select",
+    options: [
+      { value: "basic", label: "basic board" },
+      {
+        value: "kanban",
+        label: "kanban board",
+      },
+    ],
+    mandatory: true,
+  },
 ];
