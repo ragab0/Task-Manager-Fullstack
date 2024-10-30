@@ -1,27 +1,27 @@
-import { createSlice } from "@reduxjs/toolkit";
+const { toast } = require("react-toastify");
+
+const createSlice = require("@reduxjs/toolkit").createSlice;
 
 const initialState = {
-  boards: ["initialBoard"],
-  addBoardField: "",
+  boards: [],
 };
 
-const folderSlice = createSlice({
+const boardSlice = createSlice({
   name: "board",
   initialState,
   reducers: {
-    boardAddFieldSetter: function (state, action) {
-      state.addBoardField = action.payload;
+    addBoard: function (state, action) {
+      // it is just add - doesn't do any validation/checking
+      // we'll check on the submitHandler as we'll use sideeffect (toastify);
+      state.boards.push(action.payload.formData);
     },
-    folderAddSubmitSetter: function (state) {
-      const newBoard = String(state.addBoardField).toLocaleLowerCase();
-      if (newBoard && !state.boards.includes(newBoard)) {
-        state.boards.push(newBoard);
-        state.addFolderField = "";
-      } else {
-      }
+    removeBoard: function (state, action) {
+      state.boards = state.boards.filter(
+        (b) => b.title !== action.payload.title
+      );
     },
   },
 });
 
-export default boardslice.reducer;
-export const folderActions = boardslice.actions;
+module.exports = boardSlice.reducer;
+module.exports.boardActions = boardSlice.actions;

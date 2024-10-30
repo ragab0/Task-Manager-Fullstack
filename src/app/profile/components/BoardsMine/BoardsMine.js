@@ -1,15 +1,24 @@
 "use client";
-import { boards } from "@/assets/data/sidebarData";
 import { modalActions } from "@/toolkits/features/modal/modalSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { imgs } from "@/assets/imgs";
 import Link from "next/link";
 import ReduxProvider from "@/providers/ReduxProvider";
+import Image from "next/image";
+import { boardActions } from "@/toolkits/features/board/boardSlice";
+
+const { x } = imgs;
 
 function BoardsMineComp() {
   const appDispatch = useDispatch();
+  const { boards } = useSelector((state) => state.board);
 
   function addBoardHandler() {
     appDispatch(modalActions.modalAddBoardSetter());
+  }
+
+  function removeBoardHandler(title) {
+    appDispatch(boardActions.removeBoard({ title }));
   }
 
   return (
@@ -20,15 +29,22 @@ function BoardsMineComp() {
           gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
         }}
       >
-        {boards.map(({ name, link, linearUrl }, i) => (
-          <li key={i}>
+        {boards.map(({ title, type }, i) => (
+          <li key={i} className=" flex flex-col">
             <Link
-              href={link}
-              style={{ backgroundImage: `url(${linearUrl})` }}
+              href={`boards/${title}`}
+              style={{ backgroundImage: `url("/colors/ocean.svg")` }}
               className="p-2 block min-h-[100px] h-full font-bold text-white capitalize rounded-[.25rem]"
             >
-              {name}
+              {title}
+              <span className="block italic text-xs">{type}</span>
             </Link>
+            <button
+              className="self-end mt-[1px] text-xs capitalize bg-red-500 text-white py-[6px] px-3 rounded-md hover:opacity-80"
+              onClick={() => removeBoardHandler(title)}
+            >
+              remove
+            </button>
           </li>
         ))}
         <li>

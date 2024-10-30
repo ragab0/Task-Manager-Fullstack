@@ -1,6 +1,5 @@
 import FileSaver from "file-saver";
-import { createSlice } from "@reduxjs/toolkit";
-import { persistedStore, store } from "@/toolkits/store";
+const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
   version: 1,

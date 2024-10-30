@@ -4,11 +4,12 @@ import ReduxProvider from "../../providers/ReduxProvider";
 import Link from "next/link";
 import Plus from "@/assets/icons/Plus";
 import { useSelector } from "react-redux";
-import { boards, views } from "@/assets/data/sidebarData";
+import { views } from "@/assets/data/sidebarData";
 import ProfileOverview from "../ProfileOverview/ProfileOverview";
 
 function SlidesBody() {
   const { isSettings } = useSelector((state) => state.main);
+  const { boards } = useSelector((state) => state.board);
 
   return (
     <aside
@@ -44,17 +45,17 @@ function SlidesBody() {
             </button>
           </h2>
           <ul className="views-items">
-            {boards.map(({ name, link, linearUrl }, i) => (
+            {boards.map(({ title }, i) => (
               <Link
                 key={i}
-                href={link}
+                href={`/board/${title}`}
                 className=" capitalize italic py-2 px-3 cursor-pointer flex items-center gap-2 text-sm"
               >
                 <span
                   className="block w-6 h-5 rounded-sm"
-                  style={{ background: `url(${linearUrl})` }}
+                  style={{ background: `url("/colors/ocean.svg")` }}
                 ></span>
-                <span>{name}</span>
+                <span>{title}</span>
               </Link>
             ))}
           </ul>

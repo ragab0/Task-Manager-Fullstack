@@ -8,6 +8,7 @@ const filterSlice = require("./features/filter/filterSlice").default;
 const userSlice = require("./features/user/userSlice");
 const folderSlice = require("./features/folder/folderSlice").default;
 const taskSlice = require("./features/task/taskSlice");
+const boardSlice = require("./features/board/boardSlice");
 const { default: thunk } = require("redux-thunk");
 
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   user: userSlice,
   folder: folderSlice,
   task: taskSlice,
+  board: boardSlice,
 });
 
 const persistedReducer = persistReducer(

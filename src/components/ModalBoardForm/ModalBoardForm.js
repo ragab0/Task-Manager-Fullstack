@@ -5,9 +5,13 @@ import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
 import { Controller, useForm } from "react-hook-form";
 import { boardFields } from "@/assets/data/data";
+import { toast } from "react-toastify";
+import { boardActions } from "@/toolkits/features/board/boardSlice";
+import { useEffect } from "react";
 
 function ModalBoardFormComp({ isTempBaordType = null }) {
   const dispatch = useDispatch();
+  const { boards } = useSelector((state) => state.board);
   const {
     register,
     handleSubmit,
@@ -18,8 +22,11 @@ function ModalBoardFormComp({ isTempBaordType = null }) {
   });
 
   function submitHandler(data) {
-    console.log(data);
-    toast.success("Board added!");
+    if (boards.find((b) => b.title === data.title)) {
+      return toast.error("Board already exists! Please choose a unique title");
+    }
+    dispatch(boardActions.addBoard({ formData: data }));
+    toast.success("Board created successfully!");
   }
 
   return (
