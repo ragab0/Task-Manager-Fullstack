@@ -32,7 +32,7 @@ function BoardsMineComp() {
         {boards.map(({ title, type }, i) => (
           <li key={i} className=" flex flex-col">
             <Link
-              href={`boards/${title}`}
+              href={`/board/${title}${type !== "basic" ? `?type=${type}` : ""}`}
               style={{ backgroundImage: `url("/colors/ocean.svg")` }}
               className="p-2 block min-h-[100px] h-full font-bold text-white capitalize rounded-[.25rem]"
             >

@@ -24,20 +24,24 @@ function ProfileOverviewComp({ isProfiler = false }) {
         } gap-3`}
       >
         {isProfiler ? (
-          <Image
-            src={photo || vector}
-            alt="profile-img"
-            width={60}
-            height={60}
-            className="rounded-full"
-          />
-        ) : (
-          <Link href="/" className="rounded-full overflow-hidden">
-            <Image
+          <div className="rounded-full overflow-hidden w-[60px] h-[60px]">
+            {/* USING img instead of Image becuase the src of url isn't predictiable as Image requires */}
+            <img
               src={photo || vector}
               alt="profile-img"
-              width={28}
-              height={28}
+              // width={60}
+              // height={60}
+              className="w-full h-full"
+            />
+          </div>
+        ) : (
+          <Link href="/" className="rounded-full overflow-hidden w-7 h-7">
+            <img
+              src={photo || vector}
+              alt="profile-img"
+              // width={"28px"}
+              // height={"28px"}
+              className="w-full h-full"
             />
           </Link>
         )}

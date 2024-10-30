@@ -45,10 +45,12 @@ function SlidesBody() {
             </button>
           </h2>
           <ul className="views-items">
-            {boards.map(({ title }, i) => (
+            {boards.map(({ title, type }, i) => (
               <Link
                 key={i}
-                href={`/board/${title}`}
+                href={`/board/${title}${
+                  type !== "basic" ? `?type=${type}` : ""
+                }`}
                 className=" capitalize italic py-2 px-3 cursor-pointer flex items-center gap-2 text-sm"
               >
                 <span
