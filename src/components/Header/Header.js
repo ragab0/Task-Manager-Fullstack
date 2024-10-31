@@ -61,7 +61,7 @@ function HeaderBody() {
         />
       </section>
       <section className="my-10 w-fit">
-        <h2 className=" capitalize">👋 Welcome, {name}!</h2>
+        <h2 className=" capitalize">👋 Welcome, {name || "UnNamed"}!</h2>
         <p className=" font-bold mb-2">
           You had completeed
           <span className=" inline-block indent-2 text-xl font-bold text-mainClr">

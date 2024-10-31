@@ -65,10 +65,10 @@ function FoldersBody() {
           ref={backedRef}
           className="folders__backed animate-growing bg-mainClr absolute top-0 left-0 rounded-md z-[-1] transition-all"
         ></div>
-        {["all", ...folders].map((a, i) => (
+        {[...folders].map((a, i) => (
           <li
             key={i}
-            draggable
+            // draggable
             onClick={clickHandler}
             ref={i === 0 ? firstItemRef : null}
             className={`rounded-md ${i === 0 ? "active-main" : ""}`}

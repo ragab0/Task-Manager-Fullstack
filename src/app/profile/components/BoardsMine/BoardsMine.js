@@ -14,7 +14,7 @@ function BoardsMineComp() {
   const { boards } = useSelector((state) => state.board);
 
   function addBoardHandler() {
-    appDispatch(modalActions.modalAddBoardSetter());
+    appDispatch(modalActions.showModalAddBoard());
   }
 
   function removeBoardHandler(title) {

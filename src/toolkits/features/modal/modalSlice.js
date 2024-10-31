@@ -4,36 +4,37 @@ const initialState = {
   modalList: [],
 };
 
+function handleModalUpdate(state, name, payload = null) {
+  const lastModal = state.modalList.at(-1);
+
+  if (lastModal?.name !== name) {
+    state.modalList.push({ name, payload });
+  }
+}
+
 const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
-    modalAddFolderSetter: function (state) {
-      if (state.modalList.at(-1) !== "addFolder") {
-        state.modalList.push("addFolder");
-      }
+    showModalAddFolder: (state) => {
+      handleModalUpdate(state, "addFolder");
     },
-    modalAddBoardSetter: function (state) {
-      if (state.modalList.at(-1) !== "addBoard") {
-        state.modalList.push("addBoard");
-      }
+    showModalAddBoard: (state) => {
+      handleModalUpdate(state, "addBoard");
     },
-    modalAddTempKanbanBoard: function (state) {
-      if (state.modalList.at(-1) !== "addTempKanbanBoard") {
-        state.modalList.push("addTempKanbanBoard");
-      }
+    modalAddTempKanbanBoard: (state) => {
+      handleModalUpdate(state, "addTempKanbanBoard");
     },
-    modalAddTempBasicBoard: function (state) {
-      if (state.modalList.at(-1) !== "addTempBasicBoard") {
-        state.modalList.push("addTempBasicBoard");
-      }
+    modalAddTempBasicBoard: (state) => {
+      handleModalUpdate(state, "addTempBasicBoard");
     },
-    modalTaskFormSetter: function (state) {
-      if (state.modalList.at(-1) !== "taskForm") {
-        state.modalList.push("taskForm");
-      }
+    showModalTaskForm: (state) => {
+      handleModalUpdate(state, "taskForm");
     },
-    modalRemoveRear: function (state) {
+    showModalTaskFormUpdate: (state, action) => {
+      handleModalUpdate(state, "taskFormUpdate", action.payload);
+    },
+    modalRemoveRear: (state) => {
       state.modalList.pop();
     },
   },

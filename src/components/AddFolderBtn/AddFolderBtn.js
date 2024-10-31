@@ -7,7 +7,7 @@ function AddFolderBtnBody() {
   const appDispatch = useDispatch();
 
   function addFolderHandler() {
-    appDispatch(modalActions.modalAddFolderSetter());
+    appDispatch(modalActions.showModalAddFolder());
   }
 
   return (

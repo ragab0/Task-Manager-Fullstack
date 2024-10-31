@@ -1,44 +1,59 @@
 "use client";
+import ModalHeader from "../ModalHeader/ModalHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { folderActions } from "@/toolkits/features/folder/folderSlice";
-import { modalActions } from "@/toolkits/features/modal/modalSlice";
-import ModalHeader from "../ModalHeader/ModalHeader";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 
-export default function ModalAddFolder({ closeHandler }) {
+const isFolderEditted = false;
+
+export default function ModalAddFolder() {
   const appDispatch = useDispatch();
-  const { addFolderField } = useSelector((state) => state.folder);
+  const { folders } = useSelector((state) => state.folder);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({ mode: "onChange" });
 
-  function valueHandler(e) {
-    appDispatch(folderActions.folderAddFieldSetter(e.target.value));
-  }
-
-  function submitHandler(e) {
-    e.preventDefault();
-    appDispatch(folderActions.folderAddSubmitSetter());
-    appDispatch(modalActions.modalRemoveRear());
-    toast.success("Folder added!");
+  function submitHandler(data) {
+    const folder = data.name?.toLocaleLowerCase();
+    if (folders.includes(folder)) {
+      return toast.error("Folder already exists! Please choose unique name.");
+    }
+    appDispatch(folderActions.addFolder({ folder }));
+    toast.success("Folder has been added!");
   }
 
   return (
     <ModalHeader heading={"Add folder"}>
-      <div
-        // onSubmit={submitHandler}
+      <form
+        onSubmit={handleSubmit(submitHandler)}
         className="task-from content-start text-start capitalize"
       >
-        <input
-          name="title"
-          value={addFolderField}
-          onChange={valueHandler}
-          placeholder="Folder name"
-        />
-        <button
-          onClick={submitHandler}
-          className={`btn-main w-full mb-2 mt-4 `}
+        <label className={`text-sm font-bold block`}>
+          name
+          <span className="text-[#e34935] inline-block">*</span>
+          <input
+            type="text"
+            {...register("name")}
+            className={`p-2 w-full bg-slate-100 border-2 border-second text-xs ${
+              errors.name ? "border-[#e34935]  outline-none" : ""
+            }`}
+          />
+        </label>
+        <div
+          className={`w-full ${
+            isValid ? "" : "opacity-50 cursor-not-allowed"
+          } inline-block`}
         >
-          {"Add"}
-        </button>
-      </div>
+          <button
+            className={`btn-secondery ${isValid ? "" : "pointer-events-none"}`}
+          >
+            {isFolderEditted ? "save changes" : "add folder"}
+          </button>
+        </div>
+      </form>
     </ModalHeader>
   );
 }

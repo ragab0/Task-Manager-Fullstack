@@ -1,4 +1,6 @@
 "use client";
+import ReduxProvider from "../../providers/ReduxProvider";
+import Image from "next/image";
 import { marked } from "marked";
 import { imgs } from "@/assets/imgs";
 import { useEffect } from "react";
@@ -6,35 +8,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { taskActions } from "@/toolkits/features/task/taskSlice";
 import { modalActions } from "@/toolkits/features/modal/modalSlice";
 import { getPeriodByName } from "@/utils/date";
-import { selectTimeFilter } from "@/assets/data/data";
-import Image from "next/image";
-import ReduxProvider from "../../providers/ReduxProvider";
 import { getSortingVersion } from "@/utils/sort";
+import { toast } from "react-toastify";
 
 function TasksBody() {
   const appDispatch = useDispatch();
   const filterState = useSelector((state) => state.filter);
-  const { folders } = useSelector((state) => state.folder);
   const { tasksList, currentTasksList } = useSelector((state) => state.task);
   const { currentView, currentSearch, currentDate, currentDir, currentSort } =
     filterState;
 
   function addHandler() {
-    appDispatch(taskActions.taskIsEdditingSetter(false));
-    appDispatch(modalActions.modalTaskFormSetter());
-  }
-
-  function completedHandler(id) {
-    appDispatch(taskActions.taskIsCompletedSetter(id));
+    appDispatch(modalActions.showModalTaskForm());
   }
 
   function removeHandler(id) {
-    appDispatch(taskActions.taskRemoverSetter(id));
+    appDispatch(taskActions.removeTask({ id }));
+    toast.warning("Task has been deleted!");
   }
 
-  function editingHandler(task) {
-    addHandler();
-    appDispatch(taskActions.taskEdittingSetter(task));
+  function editTaskHandler(task) {
+    appDispatch(modalActions.showModalTaskFormUpdate({ task }));
   }
 
   function mdParseer(mdTexter) {
@@ -43,23 +37,21 @@ function TasksBody() {
 
   useEffect(
     function () {
-      const filteredPayload = tasksList.filter((task) => {
-        let cDateVal = String(currentDate).toLocaleLowerCase(),
-          cSearch = String(currentSearch).toLocaleLowerCase(),
-          cDir = String(currentDir).toLocaleLowerCase();
-        let taskFolder = String(task.folder).toLocaleLowerCase(),
-          taskTitle = String(task.title).toLocaleLowerCase(),
-          taskDate = new Date(Date.parse(task.fullDate));
-
-        return (
-          (cDateVal === "all" || taskDate >= getPeriodByName(cDateVal)) &&
-          taskTitle.includes(cSearch) &&
-          (cDir === "all" || cDir === taskFolder)
-        );
-      });
-
-      const sortedPayload = getSortingVersion(filteredPayload, currentSort);
-      appDispatch(taskActions.currentTasksListSetter(sortedPayload));
+      // const filteredPayload = tasksList.filter((task) => {
+      //   let cDateVal = String(currentDate).toLocaleLowerCase(),
+      //     cSearch = String(currentSearch).toLocaleLowerCase(),
+      //     cDir = String(currentDir).toLocaleLowerCase();
+      //   let taskFolder = String(task.folder).toLocaleLowerCase(),
+      //     taskTitle = String(task.title).toLocaleLowerCase(),
+      //     taskDate = new Date(Date.parse(task.fullDate));
+      //   return (
+      //     (cDateVal === "all" || taskDate >= getPeriodByName(cDateVal)) &&
+      //     taskTitle.includes(cSearch) &&
+      //     (cDir === "all" || cDir === taskFolder)
+      //   );
+      // });
+      // const sortedPayload = getSortingVersion(filteredPayload, currentSort);
+      // appDispatch(taskActions.currentTasksListSetter(sortedPayload));
     },
     [filterState, tasksList]
   );
@@ -67,8 +59,8 @@ function TasksBody() {
   // xl:grid-cols-3 lg:grid-cols-2
   return (
     <div className={`tasks flex flex-wrap gap-5 my-10`}>
-      {currentTasksList.map((task, i) => {
-        const { title, id, desc, date, isCompleted, color: clr } = task;
+      {tasksList.map((task, i) => {
+        const { title, name, id, desc, date, color: clr } = task;
         return (
           <article
             key={i}
@@ -84,7 +76,7 @@ function TasksBody() {
             <div>
               <div className="grid grid-cols-[1fr_auto] gap-4 mb-5">
                 <h4 className=" overflow-hidden break-all capitalize">
-                  {title}
+                  {name || title || "UnNamed"}
                 </h4>
                 <span>{date}</span>
               </div>
@@ -94,18 +86,8 @@ function TasksBody() {
               ></div>
             </div>
             <div className="flex justify-between gap-4 items-center">
-              <button
-                onClick={() => completedHandler(id)}
-                className={`${
-                  isCompleted
-                    ? "bg-mainClr border-mainClrLight"
-                    : "border-current"
-                } border-2 p-1 px-2 rounded-full text-center`}
-              >
-                completed
-              </button>
               <div className="inline-flex flex-row-reverse gap-2 text-sm">
-                <button onClick={() => editingHandler(task)}>
+                <button onClick={() => editTaskHandler(task)}>
                   <Image
                     alt="settings"
                     src={imgs.edit}

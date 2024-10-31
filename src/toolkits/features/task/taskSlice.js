@@ -1,57 +1,34 @@
-const { Task } = require("./taskObject");
-const { createSlice } = require("@reduxjs/toolkit");
+const { createSlice, nanoid } = require("@reduxjs/toolkit");
 
 const initialState = {
-  tasksList: Task.getInitialTasks(),
+  tasksList: [],
   currentTasksList: [],
-  taskFormData: Task.getInitialTaskFormData(),
-  taskSubmit: null,
   isTaskEditted: false,
+  taskFormData: {
+    name: null,
+    date: null,
+    desc: null,
+    folder: null,
+    id: null,
+  },
 };
 
 const taskSlice = createSlice({
   name: "task",
   initialState,
   reducers: {
-    taskFormDataSetter: function (state, action) {
-      // A General pattern to update any form;
-      state.taskFormData[action.payload.name] = action.payload.value;
+    addTask: function (state, action) {
+      state.tasksList.push({ ...action.payload.taskData, id: nanoid() });
     },
-    taskSubmitSetter: function (state) {
-      const { title: t, desc: d, folder: f } = state.taskFormData;
-      const newTask = Task.create(state.tasksList[0]?.color, t, d, f);
-      state.tasksList.unshift(newTask);
-      state.taskFormData = newTask;
-    },
-    taskEdittingSetter: function (state, action) {
-      state.isTaskEditted = true;
-      state.taskFormData = action.payload;
-    },
-    taskEditingSubmittingSetter: function (state) {
+    updateTask: function (state, { payload }) {
       state.tasksList = state.tasksList.map((t) =>
-        t.id === state.taskFormData.id ? state.taskFormData : t
+        t.id === payload?.updatedData.id ? payload.updatedData : t
       );
-      state.taskFormData = Task.getInitialTaskFormData();
     },
-    taskIsEdditingSetter: function (state, action) {
-      state.isTaskEditted = action.payload;
-    },
-    taskIsCompletedSetter: function (state, action) {
-      state.tasksList = state.tasksList.map((task) => {
-        if (task.id == action.payload) {
-          task.isCompleted = !task.isCompleted;
-        }
-        return task;
-      });
-    },
-    taskRemoverSetter: function (state, action) {
+    removeTask: function (state, action) {
       state.tasksList = state.tasksList.filter(
-        ({ id }, i) => id != action.payload
+        (t) => t.id !== action.payload?.id
       );
-    },
-    currentTasksListSetter: function (state, action) {
-      console.log("### Dispatching currentTasksList");
-      state.currentTasksList = action.payload;
     },
   },
 });

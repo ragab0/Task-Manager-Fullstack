@@ -9,6 +9,7 @@ import ReduxProvider from "../../providers/ReduxProvider";
 import ModalAddFolder from "@/components/ModalAddFolder/ModalAddFolder";
 import ModalTaskForm from "@/components/ModalTaskForm/ModalTaskForm";
 import ModalBoardForm from "../ModalBoardForm/ModalBoardForm";
+import { toast } from "react-toastify";
 
 export const dataModals = {
   addFolder: {
@@ -18,13 +19,22 @@ export const dataModals = {
     Comp: ModalBoardForm,
   },
   addTempKanbanBoard: {
-    Comp: () => <ModalBoardForm isTempBaordType={"kanban"} />,
+    Comp: ({ payload }) => (
+      <ModalBoardForm isTempBaordType={"kanban"} payload={payload} />
+    ),
   },
   addTempBasicBoard: {
-    Comp: () => <ModalBoardForm isTempBaordType={"basic"} />,
+    Comp: ({ payload }) => (
+      <ModalBoardForm isTempBaordType={"basic"} payload={payload} />
+    ),
   },
   taskForm: {
     Comp: ModalTaskForm,
+  },
+  taskFormUpdate: {
+    Comp: ({ payload }) => (
+      <ModalTaskForm isUpdateModal={true} payload={payload} />
+    ),
   },
 };
 
@@ -46,9 +56,16 @@ function ModalsBody() {
 
   return (
     <div>
-      {modalList.map((name, i) => {
+      {modalList.map(({ name, payload }, i) => {
         const Comp = dataModals[name].Comp;
-        return <Comp key={i} />;
+        if (!Comp) {
+          return toast.error(
+            // "There is modal doesn't have a UI !! check the centralized modals file.",
+            "Something went wrong!, please contact us.",
+            { autoClose: false }
+          );
+        }
+        return <Comp key={i} payload={payload} />;
       })}
     </div>
   );

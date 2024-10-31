@@ -1,126 +1,135 @@
 "use client";
+import ModalHeader from "../ModalHeader/ModalHeader";
+import Select from "react-select";
 import { taskActions } from "@/toolkits/features/task/taskSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { modalActions } from "@/toolkits/features/modal/modalSlice";
-import ModalHeader from "../ModalHeader/ModalHeader";
-import Select from "../Select/Select";
+import { DevTool } from "@hookform/devtools";
+import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
-export default function ModalTaskForm({ closeHandler }) {
+export default function ModalTaskForm({ isUpdateModal = false, payload }) {
   const appDispatch = useDispatch();
-  const { isWaiting } = useSelector((state) => state.main);
-  const { folders } = useSelector((state) => state.folder);
   const {
-    isTaskEditted,
-    taskFormData: { title, date, desc, folder },
-  } = useSelector((state) => state.task);
+    register,
+    control,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: "onChange",
+    defaultValues: isUpdateModal ? payload?.task : undefined,
+  });
+  const { folders } = useSelector((state) => state.folder);
+  const { tasksList } = useSelector((state) => state.task);
 
-  function valueHandler(e) {
-    appDispatch(
-      taskActions.taskFormDataSetter({
-        name: e.target.name,
-        value: e.target.value,
-      })
-    );
-  }
-
-  function selectOptionsHandler(val) {
-    appDispatch(
-      taskActions.taskFormDataSetter({
-        name: "folder",
-        value: val,
-      })
-    );
-  }
-
-  function selectListHandler() {
-    return folders
-      .map((f) => ({ name: f }))
-      .sort((a, b) => (a.name === folder ? -1 : b.name === folder ? 1 : 0));
-  }
-
-  function addFolderHandler() {
-    appDispatch(modalActions.modalAddFolderSetter());
-  }
-
-  function submitHandler(e) {
-    e.preventDefault();
-    if (isTaskEditted) {
-      appDispatch(taskActions.taskEditingSubmittingSetter());
-    } else {
-      appDispatch(taskActions.taskSubmitSetter());
+  function addTaskHandler(data) {
+    if (tasksList.find((t) => t.name === data.name)) {
+      return toast.error("Task already exists! Please choose unique name");
     }
-    appDispatch(modalActions.modalRemoveRear());
+    appDispatch(taskActions.addTask({ taskData: data }));
+    toast.success("Task has been added!");
   }
 
-  console.log(date, "##################");
+  function updateTaskHandler(data) {
+    appDispatch(taskActions.updateTask({ updatedData: data }));
+    toast.success("Task has been updated!");
+  }
 
   return (
-    <ModalHeader heading={isTaskEditted ? "Edit" : "add" + " task"}>
-      {/*  onSubmit={submitHandler} alhtough e.preventDefault() called, THere is problems with form ... */}
-      <div className="task-from content-start text-start capitalize">
-        <label>
-          <span>title</span>
+    <ModalHeader heading={isUpdateModal ? "Edit" : "Add task"}>
+      <form
+        onSubmit={handleSubmit(
+          isUpdateModal ? updateTaskHandler : addTaskHandler
+        )}
+        className="task-from content-start text-start capitalize"
+      >
+        <label className={`text-sm font-bold block`}>
+          name
+          <span className="text-[#e34935] inline-block">*</span>
           <input
-            name="title"
-            value={title}
-            onChange={valueHandler}
-            placeholder="e.g. task one"
+            {...register("name", {
+              required: `name is required!`,
+            })}
+            className={`p-2 w-full bg-slate-100 border-2 border-second text-xs ${
+              errors.name ? "border-[#e34935]  outline-none" : ""
+            }`}
           />
         </label>
-        <label>
-          <span>date</span>
+        <label className={`text-sm font-bold block`}>
+          date
+          <span className="text-[#e34935] inline-block">*</span>
           <input
-            type="date"
-            name="date"
-            value={date}
-            onChange={valueHandler}
-            placeholder="e.g. today"
+            type="datetime-local"
+            {...register("date", {
+              required: `date is required!`,
+            })}
+            className={`p-2 w-full bg-slate-100 border-2 border-second text-xs ${
+              errors.date ? "border-[#e34935]  outline-none" : ""
+            }`}
           />
         </label>
-        <label>
-          <span>description</span>
+        <label className={`text-sm font-bold block`}>
+          description
+          <span className="text-[#e34935] inline-block">*</span>
           <textarea
-            name="desc"
-            value={desc}
-            onChange={valueHandler}
             rows={3}
-            placeholder="e.g. drink tea && drink coffee"
+            {...register("desc", {
+              required: `description is required!`,
+            })}
+            className={`p-2 w-full bg-slate-100 border-2 border-second text-xs ${
+              errors.desc ? "border-[#e34935]  outline-none" : ""
+            }`}
           ></textarea>
         </label>
-        <label className="pointer-events-none block !opacity-50">
-          <span>select folder</span>
+        <label className={`text-sm font-bold block`}>
+          Assigned folder
+          <span className="text-[#e34935] inline-block">*</span>
+          {
+            <Controller
+              name={"folder"}
+              control={control}
+              // defaultValue={
+              //   isTempBaordType
+              //     ? options.find((o) => o.value === isTempBaordType)?.value
+              //     : undefined
+              // }
+              rules={{
+                required: `folder is required!`,
+              }}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  options={folders
+                    ?.filter((v) => v !== "all")
+                    .map((v) => ({
+                      label: v,
+                      value: v,
+                    }))}
+                  value={folders.find((o) => o.value === field.value)}
+                  onChange={(selectedOption) =>
+                    field.onChange(selectedOption.value)
+                  }
+                  className={`${
+                    errors["folder"] ? "border-[#e34935]  outline-none" : ""
+                  }`}
+                  classNamePrefix="select"
+                />
+              )}
+            />
+          }
         </label>
-        <div>
-          <label htmlFor="selectFolder">select folder</label>
-          <div className="flex gap-2 items-start mt-1">
-            <div className="w-full">
-              <Select
-                list={selectListHandler()}
-                dispacher={selectOptionsHandler}
-              />
-            </div>
-            <button
-              className="w-10 h-10 mt-2 rounded-full bg-white text-xl"
-              onClick={addFolderHandler}
-            >
-              {"+"}
-            </button>
-          </div>
-        </div>
-        <button
-          onClick={submitHandler}
-          disabled={isWaiting}
-          className={`btn-main w-full mb-2 mt-8 ${
-            isWaiting ? "opacity-60" : ""
-          }`}
+        <div
+          className={`w-full ${
+            isValid ? "" : "opacity-50 cursor-not-allowed"
+          } inline-block`}
         >
-          {isWaiting
-            ? "Loading..."
-            : isTaskEditted
-            ? "Save changes"
-            : "Add task"}
-        </button>
-      </div>
+          <button
+            className={`btn-secondery ${isValid ? "" : "pointer-events-none"}`}
+          >
+            {isUpdateModal ? "Save changes" : "Add task"}
+          </button>
+        </div>
+      </form>
+      <DevTool control={control} />
     </ModalHeader>
   );
 }

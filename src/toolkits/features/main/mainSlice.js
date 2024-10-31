@@ -3,7 +3,7 @@ const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
   version: 1,
-  isSettings: false,
+  isSettings: true,
 };
 
 const mainSlice = createSlice({
