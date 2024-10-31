@@ -1,7 +1,5 @@
 const { configureStore, combineReducers } = require("@reduxjs/toolkit");
 const { persistReducer, persistStore } = require("redux-persist");
-const storage = require("redux-persist/lib/storage").default;
-
 const mainSlice = require("./features/main/mainSlice");
 const modalSlice = require("./features/modal/modalSlice");
 const filterSlice = require("./features/filter/filterSlice").default;
@@ -10,6 +8,7 @@ const folderSlice = require("./features/folder/folderSlice").default;
 const taskSlice = require("./features/task/taskSlice");
 const boardSlice = require("./features/board/boardSlice");
 const { default: thunk } = require("redux-thunk");
+const { customStorage } = require("./storage");
 
 const rootReducer = combineReducers({
   main: mainSlice,
@@ -24,8 +23,13 @@ const rootReducer = combineReducers({
 const persistedReducer = persistReducer(
   {
     key: "tod",
-    storage,
+    storage: customStorage,
     serialize: true,
+    blacklist: ["modal"], // to exclude transient state
+    // configuration options
+    writeFailHandler: (err) => {
+      console.warn("Redux persist write failed:", err);
+    },
   },
   rootReducer
 );
@@ -33,6 +37,19 @@ const persistedReducer = persistReducer(
 const store = configureStore({
   reducer: persistedReducer,
   middleware: [thunk],
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [
+          "persist/PERSIST",
+          "persist/REHYDRATE",
+          "persist/PAUSE",
+          "persist/PURGE",
+          "persist/REGISTER",
+        ],
+      },
+    }).concat(thunk),
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 const persistedStore = persistStore(store);

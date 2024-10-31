@@ -1,9 +1,9 @@
 "use client";
-
 import Header from "@/components/Header/Header";
 import Tasks from "@/components/Tasks/Tasks";
 import ReduxProvider from "@/providers/ReduxProvider";
 import { useSelector } from "react-redux";
+import { notFound } from "next/navigation";
 
 /**
  * since we don't use remote db - third party, api - we'll use the use client
@@ -11,11 +11,12 @@ import { useSelector } from "react-redux";
  *
  */
 
-function ClientSideComp({ paramId }) {
+function ClientSideComp({ boardId }) {
   const { boards } = useSelector((state) => state.board);
-
-  if (!boards.find((b) => b.id === paramId)) {
-    return <></>;
+  const boardExists = boards.some((board) => board.title === boardId);
+  if (!boardExists) {
+    notFound();
+    return null;
   }
 
   return (
@@ -26,10 +27,10 @@ function ClientSideComp({ paramId }) {
   );
 }
 
-export default function ClientSide({ paramId }) {
+export default function ClientSide({ boardId }) {
   return (
     <ReduxProvider>
-      <ClientSideComp paramId={paramId} />
+      <ClientSideComp boardId={boardId} />
     </ReduxProvider>
   );
 }
