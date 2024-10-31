@@ -1,12 +1,12 @@
-import Header from "@/components/Header/Header";
-import Tasks from "@/components/Tasks/Tasks";
-import React from "react";
+import ClientSide from "./components/ClientSide/ClientSide";
 
-export default function BoardPage() {
-  return (
-    <>
-      <Header />
-      <Tasks />
-    </>
-  );
+export async function generateMetadata({ params: { boardId } }) {
+  return {
+    title: `${boardId} - Tod`,
+    icon: "/favicon.ico",
+  };
+}
+
+export default function BoardPage({ params: { boardId } }) {
+  return <ClientSide boardId={boardId} />;
 }

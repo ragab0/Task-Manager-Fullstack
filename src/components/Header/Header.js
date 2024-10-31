@@ -14,7 +14,7 @@ function HeaderBody() {
   const progressRef = useRef(null);
   const { isSettings } = useSelector((state) => state.main);
   const { currentSearch } = useSelector((state) => state.filter);
-  const { currentTasksList } = useSelector((state) => state.task);
+  const { tasksList = [] } = useSelector((state) => state.task);
   const {
     userFormData: { name },
   } = useSelector((state) => state.user);
@@ -46,9 +46,11 @@ function HeaderBody() {
     [isSettings]
   );
 
-  const currentLength = currentTasksList.length;
-  const currentProgress =
-    currentTasksList.reduce((p, c) => p + +c.isCompleted, 0) || 0;
+  const currentLength = tasksList.length;
+  const currentProgress = tasksList.reduce(
+    (p, c) => p + (c.folder === "done" ? 1 : 0),
+    0
+  );
 
   return (
     <header>

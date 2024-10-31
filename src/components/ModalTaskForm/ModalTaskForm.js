@@ -87,11 +87,7 @@ export default function ModalTaskForm({ isUpdateModal = false, payload }) {
             <Controller
               name={"folder"}
               control={control}
-              // defaultValue={
-              //   isTempBaordType
-              //     ? options.find((o) => o.value === isTempBaordType)?.value
-              //     : undefined
-              // }
+              defaultValue={folders.find((f) => f === payload?.task.folder)}
               rules={{
                 required: `folder is required!`,
               }}
@@ -99,12 +95,16 @@ export default function ModalTaskForm({ isUpdateModal = false, payload }) {
                 <Select
                   {...field}
                   options={folders
-                    ?.filter((v) => v !== "all")
-                    .map((v) => ({
-                      label: v,
-                      value: v,
+                    ?.filter((f) => f !== "all")
+                    .map((f) => ({
+                      label: f,
+                      value: f,
                     }))}
-                  value={folders.find((o) => o.value === field.value)}
+                  value={
+                    field.value
+                      ? { label: field.value, value: field.value }
+                      : null
+                  }
                   onChange={(selectedOption) =>
                     field.onChange(selectedOption.value)
                   }

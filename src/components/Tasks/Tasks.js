@@ -37,21 +37,21 @@ function TasksBody() {
 
   useEffect(
     function () {
-      // const filteredPayload = tasksList.filter((task) => {
-      //   let cDateVal = String(currentDate).toLocaleLowerCase(),
-      //     cSearch = String(currentSearch).toLocaleLowerCase(),
-      //     cDir = String(currentDir).toLocaleLowerCase();
-      //   let taskFolder = String(task.folder).toLocaleLowerCase(),
-      //     taskTitle = String(task.title).toLocaleLowerCase(),
-      //     taskDate = new Date(Date.parse(task.fullDate));
-      //   return (
-      //     (cDateVal === "all" || taskDate >= getPeriodByName(cDateVal)) &&
-      //     taskTitle.includes(cSearch) &&
-      //     (cDir === "all" || cDir === taskFolder)
-      //   );
-      // });
-      // const sortedPayload = getSortingVersion(filteredPayload, currentSort);
-      // appDispatch(taskActions.currentTasksListSetter(sortedPayload));
+      const filteredPayload = tasksList.filter((task) => {
+        let cDateVal = String(currentDate).toLocaleLowerCase(),
+          cSearch = String(currentSearch).toLocaleLowerCase(),
+          cDir = String(currentDir).toLocaleLowerCase();
+        let taskFolder = String(task.folder).toLocaleLowerCase(),
+          taskTitle = String(task.title).toLocaleLowerCase(),
+          taskDate = new Date(Date.parse(task.fullDate));
+        return (
+          (cDateVal === "all" || taskDate >= getPeriodByName(cDateVal)) &&
+          taskTitle.includes(cSearch) &&
+          (cDir === "all" || cDir === taskFolder)
+        );
+      });
+      const sortedPayload = getSortingVersion(filteredPayload, currentSort);
+      appDispatch(taskActions.currentTasksListSetter({ list: sortedPayload }));
     },
     [filterState, tasksList]
   );
@@ -59,7 +59,7 @@ function TasksBody() {
   // xl:grid-cols-3 lg:grid-cols-2
   return (
     <div className={`tasks flex flex-wrap gap-5 my-10`}>
-      {tasksList.map((task, i) => {
+      {currentTasksList.map((task, i) => {
         const { title, name, id, desc, date, color: clr } = task;
         return (
           <article

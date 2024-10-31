@@ -5,18 +5,17 @@ import { filterActions } from "@/toolkits/features/filter/filterSlice";
 import ReduxProvider from "../../providers/ReduxProvider";
 
 function FoldersBody() {
-  const appDispatch = useDispatch();
-  const { isResetting } = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
+  const { isResetting, currentDir } = useSelector((state) => state.filter);
 
   const backedRefChecker = useRef(null);
   const backedRef = useRef(null);
   const firstItemRef = useRef(null);
   const { folders } = useSelector((state) => state.folder);
-  const { currentDir } = useSelector((state) => state.filter);
 
   function folHandler(value) {
-    // appDispatch(filterActions.currentDirSetter(e.target.closest("span").name))
-    appDispatch(filterActions.currentDirSetter(value));
+    // dispatch(filterActions.currentDirSetter(e.target.closest("span").name))
+    dispatch(filterActions.currentDirSetter(value));
   }
 
   function enterHandler(e) {
@@ -54,6 +53,10 @@ function FoldersBody() {
     [isResetting]
   );
 
+  useEffect(function () {
+    firstItemRef.current.click();
+  }, []);
+
   return (
     <div className="folders overflow-auto">
       <ul className="inline-flex items-center gap-2 me-2 pb-2 relative">
@@ -65,22 +68,21 @@ function FoldersBody() {
           ref={backedRef}
           className="folders__backed animate-growing bg-mainClr absolute top-0 left-0 rounded-md z-[-1] transition-all"
         ></div>
-        {[...folders].map((a, i) => (
+        {[...folders].map((f, i) => (
           <li
             key={i}
             // draggable
             onClick={clickHandler}
-            ref={i === 0 ? firstItemRef : null}
-            className={`rounded-md ${i === 0 ? "active-main" : ""}`}
+            ref={f === currentDir ? firstItemRef : null}
             onMouseEnter={enterHandler}
             onMouseLeave={leaveHandler}
           >
             <span
-              name={a.toLocaleLowerCase()}
+              name={f.toLocaleLowerCase()}
               className={`block cursor-pointer py-3 px-9 rounded-lg capitalize`}
-              onClick={() => folHandler(a)}
+              onClick={() => folHandler(f)}
             >
-              {a}
+              {f}
             </span>
           </li>
         ))}

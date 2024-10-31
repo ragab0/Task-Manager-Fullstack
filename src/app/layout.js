@@ -1,5 +1,5 @@
-import Modals from "@/components/Modals/Modals";
 import "./globals.css";
+import Modals from "@/components/Modals/Modals";
 import Footer from "@/components/Footer/Footer";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import SidebarViewBtn from "@/components/SidebarViewBtn/SidebarViewBtn";

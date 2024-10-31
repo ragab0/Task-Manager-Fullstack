@@ -16,6 +16,7 @@ import vector from "./Vector.svg";
 import list from "./list.svg";
 import sort from "./sort.svg";
 import admin from "./admin.svg";
+import notFound from "./NotFound.png";
 
 import ViewSquares from "./ViewSquares.js";
 import ViewPaillers from "./ViewPaillers.js";
@@ -41,6 +42,7 @@ export const imgs = {
   list,
   sort,
   admin,
+  notFound,
 };
 
 export const svgs = {

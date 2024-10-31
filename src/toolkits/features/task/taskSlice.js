@@ -3,7 +3,6 @@ const { createSlice, nanoid } = require("@reduxjs/toolkit");
 const initialState = {
   tasksList: [],
   currentTasksList: [],
-  isTaskEditted: false,
   taskFormData: {
     name: null,
     date: null,
@@ -29,6 +28,9 @@ const taskSlice = createSlice({
       state.tasksList = state.tasksList.filter(
         (t) => t.id !== action.payload?.id
       );
+    },
+    currentTasksListSetter: function (state, action) {
+      state.currentTasksList = action.payload.list;
     },
   },
 });
